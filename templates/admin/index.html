@@ -1,0 +1,140 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div id="content-main">
+    <!-- Dashboard Stats -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white;">
+            <h3>🏫 Total Schools</h3>
+            <div style="font-size: 2.5em; font-weight: bold;">{{ admin_stats.total_schools }}</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); padding: 20px; border-radius: 10px; color: white;">
+            <h3>✅ Partner Schools</h3>
+            <div style="font-size: 2.5em; font-weight: bold;">{{ admin_stats.partner_schools }}</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); padding: 20px; border-radius: 10px; color: white;">
+            <h3>⭐ Featured Schools</h3>
+            <div style="font-size: 2.5em; font-weight: bold;">{{ admin_stats.featured_schools }}</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%); padding: 20px; border-radius: 10px; color: white;">
+            <h3>👨‍🎓 Total Students</h3>
+            <div style="font-size: 2.5em; font-weight: bold;">{{ admin_stats.total_students }}</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%); padding: 20px; border-radius: 10px; color: white;">
+            <h3>📢 Pending Inquiries</h3>
+            <div style="font-size: 2.5em; font-weight: bold;">{{ admin_stats.pending_inquiries }}</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); padding: 20px; border-radius: 10px; color: white;">
+            <h3>💰 Premium Schools</h3>
+            <div style="font-size: 2.5em; font-weight: bold;">{{ admin_stats.premium_schools }}</div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2>🚀 Quick Actions</h2>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+            <a href="/admin/schools/partnerschool/add/" class="button" style="background: #4CAF50; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none;">
+                ➕ Add New School
+            </a>
+            <a href="/admin/students/student/add/" class="button" style="background: #2196F3; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none;">
+                👨‍🎓 Add New Student
+            </a>
+            <a href="/admin/advertising/adinquiry/" class="button" style="background: #FF9800; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none;">
+                📋 View Inquiries
+            </a>
+            <a href="/admin/accounts/schooluser/add/" class="button" style="background: #9C27B0; padding: 10px 20px; border-radius: 5px; color: white; text-decoration: none;">
+                🏫 Register School Account
+            </a>
+        </div>
+    </div>
+    
+    <!-- Recent Schools -->
+    <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2>📋 Recent Schools</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f5f5f5;">
+                    <th style="padding: 10px; text-align: left;">School Name</th>
+                    <th style="padding: 10px; text-align: left;">Region</th>
+                    <th style="padding: 10px; text-align: left;">Status</th>
+                    <th style="padding: 10px; text-align: left;">Ad Tier</th>
+                    <th style="padding: 10px; text-align: left;">Date Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for school in recent_schools %}
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        <a href="/admin/schools/partnerschool/{{ school.id }}/change/">{{ school.name }}</a>
+                    </td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">{{ school.region }}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        {% if school.is_partner %}
+                            <span style="color: #4CAF50;">✓ Partner</span>
+                        {% else %}
+                            <span style="color: #FF9800;">⏳ Pending</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        {% if school.ad_tier == 'premium' %}
+                            <span style="color: #FFD700;">⭐ Premium</span>
+                        {% elif school.ad_tier == 'standard' %}
+                            <span style="color: #4CAF50;">📌 Standard</span>
+                        {% else %}
+                            <span style="color: #9E9E9E;">📋 Basic</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">{{ school.created_at|date:"d M Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Recent Inquiries -->
+    <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2>📢 Recent Advertising Inquiries</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f5f5f5;">
+                    <th style="padding: 10px; text-align: left;">School</th>
+                    <th style="padding: 10px; text-align: left;">Contact</th>
+                    <th style="padding: 10px; text-align: left;">Package</th>
+                    <th style="padding: 10px; text-align: left;">Status</th>
+                    <th style="padding: 10px; text-align: left;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inquiry in recent_inquiries %}
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">{{ inquiry.school_name }}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">{{ inquiry.contact_name }}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        {% if inquiry.tier == 'premium' %}
+                            <span style="color: #FFD700;">⭐ Premium</span>
+                        {% elif inquiry.tier == 'standard' %}
+                            <span style="color: #4CAF50;">📌 Standard</span>
+                        {% else %}
+                            <span style="color: #9E9E9E;">📋 Basic</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                        {% if inquiry.is_processed %}
+                            <span style="color: #4CAF50;">✓ Processed</span>
+                        {% else %}
+                            <span style="color: #FF9800;">⏳ Pending</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px; border-bottom: 1px solid #eee;">{{ inquiry.created_at|date:"d M Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Default Admin Content -->
+    {{ block.super }}
+</div>
+{% endblock %}

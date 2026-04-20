@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduPath API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+        .card { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .success { color: green; border-left: 4px solid green; }
+        .error { color: red; border-left: 4px solid red; }
+        pre { background: #eee; padding: 10px; overflow: auto; border-radius: 4px; }
+        button { background: #4caf50; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #45a049; }
+        input, select { padding: 8px; margin: 5px; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🎓 EduPath API Connection Test</h1>
+    
+    <div class="card">
+        <h2>Test API Connection</h2>
+        <button onclick="testConnection()">Test Connection</button>
+        <div id="connectionResult"></div>
+    </div>
+    
+    <div class="card">
+        <h2>Test Combination Recommender</h2>
+        <div>
+            <label>Mathematics: </label>
+            <select id="math">
+                <option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option>
+            </select>
+            <label>Physics: </label>
+            <select id="physics">
+                <option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option>
+            </select>
+            <label>Chemistry: </label>
+            <select id="chemistry">
+                <option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option>
+            </select>
+            <label>Biology: </label>
+            <select id="biology">
+                <option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option>
+            </select>
+        </div>
+        <button onclick="getRecommendations()">Get Recommendations</button>
+        <div id="recommendationResult"></div>
+    </div>
+    
+    <div class="card">
+        <h2>API Endpoints</h2>
+        <div id="endpoints"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:8000';
+        
+        async function testConnection() {
+            const result = document.getElementById('connectionResult');
+            result.innerHTML = '<p>Testing...</p>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/auth/meta/`);
+                const data = await response.json();
+                result.innerHTML = `<div class="success">✅ Connected! Server response: <pre>${JSON.stringify(data, null, 2)}</pre></div>`;
+            } catch(e) {
+                result.innerHTML = `<div class="error">❌ Connection failed: ${e.message}</div>`;
+            }
+        }
+        
+        async function getRecommendations() {
+            const grades = {
+                'Mathematics': document.getElementById('math').value,
+                'Physics': document.getElementById('physics').value,
+                'Chemistry': document.getElementById('chemistry').value,
+                'Biology': document.getElementById('biology').value
+            };
+            
+            const result = document.getElementById('recommendationResult');
+            result.innerHTML = '<p>Getting recommendations...</p>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/recommend/`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({grades: grades})
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    let html = '<div class="success">✅ Recommendations:</div>';
+                    data.recommendations.forEach(rec => {
+                        html += `
+                            <div style="margin: 10px 0; padding: 10px; background: #f9f9f9; border-radius: 4px;">
+                                <strong>${rec.code}</strong> - ${rec.name}<br>
+                                Match: ${rec.percentage}%<br>
+                                ${rec.weak_subjects.length ? `⚠️ Weak in: ${rec.weak_subjects.join(', ')}` : '✓ Strong match'}
+                            </div>
+                        `;
+                    });
+                    result.innerHTML = html;
+                } else {
+                    result.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                }
+            } catch(e) {
+                result.innerHTML = `<div class="error">❌ Request failed: ${e.message}</div>`;
+            }
+        }
+        
+        // Test endpoints on load
+        testConnection();
+    </script>
+</body>
+</html>
