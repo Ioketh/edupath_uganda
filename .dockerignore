@@ -1,0 +1,12 @@
+venv
+venv312
+__pycache__
+*.pyc
+*.log
+db.sqlite3
+media
+staticfiles
+.env
+.git
+.gitignore
+*.md
