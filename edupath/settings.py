@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
 # ──────────────────────────────────────────────────────────────────
 # 11. CORS
 # ──────────────────────────────────────────────────────────────────
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ORIGINS', 'https://edupath-uganda.onrender.com').split(',')
 
 # ──────────────────────────────────────────────────────────────────
 # 12. SECURITY HEADERS (Production only)
