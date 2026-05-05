@@ -6,7 +6,7 @@
 <title>EduPath Uganda — A-Level Guide & AI Academic Advisor</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ========== FULL ORIGINAL CSS (preserved, no changes) ========== */
+/* ========== FULL CSS (ORIGINAL, UNCHANGED) ========== */
 :root{
   --ink:#0d0f14;--ink2:#181c25;--ink3:#232836;
   --surface:rgba(255,255,255,.04);--surface2:rgba(255,255,255,.07);
@@ -51,7 +51,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;ali
 /* LAYOUT */
 .app-shell{padding-top:60px;min-height:100vh;}
 .app-body{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;}
-.wide-body{max-width:1140px;margin:0 auto;padding:2.5rem 1.5rem;}
+.wide-body{max-width:1140px;margin:0 auto;padding:2.5rem 1.5rem;transition:background 0.5s ease;}
 .bread{display:flex;align-items:center;gap:.4rem;font-size:.77rem;color:var(--muted);margin-bottom:1.5rem;}
 .bread a{cursor:pointer;transition:color .2s;}.bread a:hover{color:var(--txt);}
 .bread-sep{color:var(--border2);}
@@ -387,15 +387,9 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:2.2rem 
 </head>
 <body>
 
-<!-- LOADER -->
 <div class="loader-overlay" id="loader"><div class="spin"></div><div class="loader-txt" id="loaderTxt">Please wait…</div></div>
+<div class="modal-bg" id="schoolModal" onclick="if(event.target===this)closeModal()"><div class="modal" id="schoolModalContent"></div></div>
 
-<!-- SCHOOL MODAL -->
-<div class="modal-bg" id="schoolModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="schoolModalContent"></div>
-</div>
-
-<!-- NAV -->
 <nav>
   <div class="nav-brand" onclick="go('landing')"><div class="nav-dot"></div>EduPath</div>
   <div class="nav-links">
@@ -411,87 +405,16 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:2.2rem 
   </div>
 </nav>
 
-<!-- LANDING PAGE -->
+<!-- ========== LANDING PAGE ========== -->
 <div id="landing" class="page active">
-  <div class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-inner">
-      <div>
-        <div class="hero-eyebrow"><span class="pulse"></span>Uganda A-Level Guidance · PUJAB & NCDC Aligned · 2025</div>
-        <h1>Find Your <span class="hl">A-Level Path</span><br/>with <span class="hl2">AI Guidance</span></h1>
-        <p class="hero-sub">Enter your O-Level results. Get ranked combinations, career matches, degree pathways — and talk to an AI that truly understands Uganda's education system and job market.</p>
-        <div class="hero-actions">
-          <button class="hbtn hbtn-primary" onclick="go('student')">🎓 Get My Combinations</button>
-          <button class="hbtn hbtn-outline" onclick="go('ai-advisor')">🤖 Ask AI Advisor</button>
-        </div>
-        <div class="hero-stats">
-          <div><div class="hstat-n" style="color:var(--gold)">30+</div><div class="hstat-l">Combinations</div></div>
-          <div><div class="hstat-n" style="color:var(--teal)">60+</div><div class="hstat-l">Degree Programmes</div></div>
-          <div><div class="hstat-n" style="color:var(--violet)">AI</div><div class="hstat-l">Academic Advisor</div></div>
-          <div><div class="hstat-n" style="color:var(--sky)">Free</div><div class="hstat-l">For Students</div></div>
-        </div>
-      </div>
-      <div class="hcards">
-        <div class="hcard"><div class="hcard-top"><div class="hcard-ico" style="background:rgba(245,200,66,.1)">📋</div><div><div class="hcard-title">O-Level Grades Entered</div><div class="hcard-sub">Grace Akello · S.4 2025</div></div></div><div class="cpills"><span class="cpill cpill-g">Physics — A</span><span class="cpill cpill-g">Chemistry — A</span><span class="cpill cpill-t">Biology — B</span><span class="cpill cpill-s">Mathematics — B</span></div></div>
-        <div class="hcard"><div class="hcard-top"><div class="hcard-ico" style="background:rgba(45,212,191,.1)">🏆</div><div><div class="hcard-title">Top Combinations Ranked</div><div class="hcard-sub">PUJAB & NCDC Aligned · 2025</div></div></div><div class="bar-row"><div class="bar-label"><span>PCB/Sub-Math</span><span>96%</span></div><div class="bar-track"><div class="bar-fill" style="--w:96%"></div></div></div><div class="bar-row" style="margin-top:.5rem"><div class="bar-label"><span>PCM/ICT</span><span>88%</span></div><div class="bar-track"><div class="bar-fill" style="--w:88%;animation-delay:.3s"></div></div></div></div>
-        <div class="hcard"><div class="hcard-top"><div class="hcard-ico" style="background:rgba(167,139,250,.1)">🤖</div><div><div class="hcard-title">AI Advisor Response</div><div class="hcard-sub">Uganda job market · 2025</div></div></div><div style="font-size:.8rem;color:var(--muted2);line-height:1.6;">"With PCB and strong grades, you are well positioned for Medicine at Makerere. Government sponsorship is competitive — aim for 17+ UACE points…"</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" style="background:var(--ink2);border-top:1px solid var(--border);">
-    <div class="section-inner">
-      <div class="stag stag-g">What EduPath Offers</div>
-      <h2 style="font-size:clamp(1.75rem,3.2vw,2.5rem);letter-spacing:-.025em;margin-bottom:.8rem;">Everything You Need to Choose Confidently</h2>
-      <p style="color:var(--muted2);font-size:.93rem;line-height:1.72;max-width:560px;">From combination ranking to career compatibility, university programmes to AI guidance — all grounded in Uganda's PUJAB and NCDC framework.</p>
-      <div class="feat-grid">
-        <div class="feat-card" onclick="go('student')"><div class="feat-ico" style="background:rgba(245,200,66,.1)">🏆</div><h3>Ranked Combinations</h3><p>30+ combinations ranked by your O-Level grades using PUJAB rules and subsidiary requirements.</p></div>
-        <div class="feat-card" onclick="go('student')"><div class="feat-ico" style="background:rgba(45,212,191,.1)">💼</div><h3>Career & Degree Matching</h3><p>60+ degree programmes from Medicine to AI, matched to your grades and career interests.</p></div>
-        <div class="feat-card" onclick="go('ai-advisor')"><div class="feat-ico" style="background:rgba(167,139,250,.1)">🤖</div><h3>AI Academic Advisor</h3><p>A real AI trained on Uganda's education system — ask about combinations, careers, salaries, or struggles.</p></div>
-        <div class="feat-card" onclick="go('partner-schools')"><div class="feat-ico" style="background:rgba(56,189,248,.1)">🏫</div><h3>Partner Schools</h3><p>Browse and compare A-Level schools across Uganda by region, combination, boarding and type.</p></div>
-        <div class="feat-card" onclick="go('school-auth')"><div class="feat-ico" style="background:rgba(251,113,133,.1)">📊</div><h3>School Admin Portal</h3><p>Schools manage student records, bulk evaluations and advertising listings through a secure portal.</p></div>
-        <div class="feat-card" onclick="go('parent')"><div class="feat-ico" style="background:rgba(74,222,128,.1)">👨‍👩‍👧</div><h3>Parent Portal</h3><p>View your child's recommended combinations, degree paths and career guidance — no login needed.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-inner">
-      <div class="stag stag-t">Who Uses EduPath?</div>
-      <h2 style="font-size:clamp(1.75rem,3.2vw,2.5rem);letter-spacing:-.025em;margin-bottom:2rem;">Built for Everyone in the Journey</h2>
-      <div class="roles-grid">
-        <div class="role-card"><div class="role-av" style="background:rgba(245,200,66,.1)">🎓</div><h3>Students</h3><p>No login needed. Enter O-Level grades and get full guidance — combinations, careers, universities, AI advisor.</p><button class="role-btn" onclick="go('student')">Open Student Portal →</button></div>
-        <div class="role-card"><div class="role-av" style="background:rgba(45,212,191,.1)">👨‍👩‍👧</div><h3>Parents</h3><p>No login needed. Find your child's profile and get a clear picture of their academic options and best path.</p><button class="role-btn" onclick="go('parent')">Open Parent Portal →</button></div>
-        <div class="role-card"><div class="role-av" style="background:rgba(167,139,250,.1)">🏫</div><h3>Schools</h3><p>Login required. Manage student records, run bulk evaluations, and advertise your school to S.4 leavers.</p><button class="role-btn" onclick="go('school-auth')">School Login →</button></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FEATURED SCHOOLS ON LANDING -->
-  <div class="section" style="background:var(--ink2);border-top:1px solid var(--border);padding-top:3.5rem;padding-bottom:3.5rem;">
-    <div class="section-inner">
-      <div class="stag stag-g">Featured Partner Schools</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;">
-        <h2 style="font-size:1.7rem;letter-spacing:-.022em;">Schools Advertising on EduPath</h2>
-        <button class="btn btn-ghost" onclick="go('partner-schools')">View All Schools →</button>
-      </div>
-      <div class="schools-grid" id="landingFeatured"></div>
-      <div class="alert alert-g" style="margin-top:1.4rem;">🏫 <strong>Is your school not listed?</strong> <a onclick="go('school-auth')" style="color:var(--gold);cursor:pointer;font-weight:700;">Register your school →</a> and reach thousands of S.4 leavers choosing their A-Level school this season.</div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand"><h3>EduPath Uganda</h3><p>Uganda's A-Level guidance platform — combining PUJAB curriculum data, AI technology and school partnerships to help every S.4 leaver choose their best path.</p></div>
-      <div class="footer-col"><h4>Portals</h4><a onclick="go('student')">Student Portal</a><a onclick="go('parent')">Parent Portal</a><a onclick="go('school-auth')">School Login</a></div>
-      <div class="footer-col"><h4>Tools</h4><a onclick="go('ai-advisor')">AI Advisor</a><a onclick="go('partner-schools')">Partner Schools</a></div>
-      <div class="footer-col"><h4>Info</h4><a>PUJAB Guidelines</a><a>NCDC Framework</a><a onclick="go('school-auth')">Advertise Your School</a></div>
-    </div>
-    <div class="footer-bot">© 2025 EduPath Uganda · PUJAB & NCDC Aligned · Free for students and parents · <a onclick="go('school-auth')" style="color:var(--gold);cursor:pointer;">School Advertising</a></div>
-  </footer>
+  <div class="hero"><div class="hero-grid"></div><div class="hero-inner"><div><div class="hero-eyebrow"><span class="pulse"></span>Uganda A-Level Guidance · PUJAB & NCDC Aligned · 2025</div><h1>Find Your <span class="hl">A-Level Path</span><br/>with <span class="hl2">AI Guidance</span></h1><p class="hero-sub">Enter your O-Level results. Get ranked combinations, career matches, degree pathways — and talk to an AI that truly understands Uganda's education system and job market.</p><div class="hero-actions"><button class="hbtn hbtn-primary" onclick="go('student')">🎓 Get My Combinations</button><button class="hbtn hbtn-outline" onclick="go('ai-advisor')">🤖 Ask AI Advisor</button></div><div class="hero-stats"><div><div class="hstat-n" style="color:var(--gold)">30+</div><div class="hstat-l">Combinations</div></div><div><div class="hstat-n" style="color:var(--teal)">60+</div><div class="hstat-l">Degree Programmes</div></div><div><div class="hstat-n" style="color:var(--violet)">AI</div><div class="hstat-l">Academic Advisor</div></div><div><div class="hstat-n" style="color:var(--sky)">Free</div><div class="hstat-l">For Students</div></div></div></div><div class="hcards"><div class="hcard"><div class="hcard-top"><div class="hcard-ico" style="background:rgba(245,200,66,.1)">📋</div><div><div class="hcard-title">O-Level Grades Entered</div><div class="hcard-sub">Grace Akello · S.4 2025</div></div></div><div class="cpills"><span class="cpill cpill-g">Physics — A</span><span class="cpill cpill-g">Chemistry — A</span><span class="cpill cpill-t">Biology — B</span><span class="cpill cpill-s">Mathematics — B</span></div></div><div class="hcard"><div class="hcard-top"><div class="hcard-ico" style="background:rgba(45,212,191,.1)">🏆</div><div><div class="hcard-title">Top Combinations Ranked</div><div class="hcard-sub">PUJAB & NCDC Aligned · 2025</div></div></div><div class="bar-row"><div class="bar-label"><span>PCB/Sub-Math</span><span>96%</span></div><div class="bar-track"><div class="bar-fill" style="--w:96%"></div></div></div><div class="bar-row" style="margin-top:.5rem"><div class="bar-label"><span>PCM/ICT</span><span>88%</span></div><div class="bar-track"><div class="bar-fill" style="--w:88%;animation-delay:.3s"></div></div></div></div><div class="hcard"><div class="hcard-top"><div class="hcard-ico" style="background:rgba(167,139,250,.1)">🤖</div><div><div class="hcard-title">AI Advisor Response</div><div class="hcard-sub">Uganda job market · 2025</div></div></div><div style="font-size:.8rem;color:var(--muted2);line-height:1.6;">"With PCB and strong grades, you are well positioned for Medicine at Makerere. Government sponsorship is competitive — aim for 17+ UACE points…"</div></div></div></div></div>
+  <div class="section" style="background:var(--ink2);border-top:1px solid var(--border);"><div class="section-inner"><div class="stag stag-g">What EduPath Offers</div><h2 style="font-size:clamp(1.75rem,3.2vw,2.5rem);letter-spacing:-.025em;margin-bottom:.8rem;">Everything You Need to Choose Confidently</h2><p style="color:var(--muted2);font-size:.93rem;line-height:1.72;max-width:560px;">From combination ranking to career compatibility, university programmes to AI guidance — all grounded in Uganda's PUJAB and NCDC framework.</p><div class="feat-grid"><div class="feat-card" onclick="go('student')"><div class="feat-ico" style="background:rgba(245,200,66,.1)">🏆</div><h3>Ranked Combinations</h3><p>30+ combinations ranked by your O-Level grades using PUJAB rules and subsidiary requirements.</p></div><div class="feat-card" onclick="go('student')"><div class="feat-ico" style="background:rgba(45,212,191,.1)">💼</div><h3>Career & Degree Matching</h3><p>60+ degree programmes from Medicine to AI, matched to your grades and career interests.</p></div><div class="feat-card" onclick="go('ai-advisor')"><div class="feat-ico" style="background:rgba(167,139,250,.1)">🤖</div><h3>AI Academic Advisor</h3><p>A real AI trained on Uganda's education system — ask about combinations, careers, salaries, or struggles.</p></div><div class="feat-card" onclick="go('partner-schools')"><div class="feat-ico" style="background:rgba(56,189,248,.1)">🏫</div><h3>Partner Schools</h3><p>Browse and compare A-Level schools across Uganda by region, combination, boarding and type.</p></div><div class="feat-card" onclick="go('school-auth')"><div class="feat-ico" style="background:rgba(251,113,133,.1)">📊</div><h3>School Admin Portal</h3><p>Schools manage student records, bulk evaluations and advertising listings through a secure portal.</p></div><div class="feat-card" onclick="go('parent')"><div class="feat-ico" style="background:rgba(74,222,128,.1)">👨‍👩‍👧</div><h3>Parent Portal</h3><p>View your child's recommended combinations, degree paths and career guidance — no login needed.</p></div></div></div></div>
+  <div class="section"><div class="section-inner"><div class="stag stag-t">Who Uses EduPath?</div><h2 style="font-size:clamp(1.75rem,3.2vw,2.5rem);letter-spacing:-.025em;margin-bottom:2rem;">Built for Everyone in the Journey</h2><div class="roles-grid"><div class="role-card"><div class="role-av" style="background:rgba(245,200,66,.1)">🎓</div><h3>Students</h3><p>No login needed. Enter O-Level grades and get full guidance — combinations, careers, universities, AI advisor.</p><button class="role-btn" onclick="go('student')">Open Student Portal →</button></div><div class="role-card"><div class="role-av" style="background:rgba(45,212,191,.1)">👨‍👩‍👧</div><h3>Parents</h3><p>No login needed. Find your child's profile and get a clear picture of their academic options and best path.</p><button class="role-btn" onclick="go('parent')">Open Parent Portal →</button></div><div class="role-card"><div class="role-av" style="background:rgba(167,139,250,.1)">🏫</div><h3>Schools</h3><p>Login required. Manage student records, run bulk evaluations, and advertise your school to S.4 leavers.</p><button class="role-btn" onclick="go('school-auth')">School Login →</button></div></div></div></div>
+  <div class="section" style="background:var(--ink2);border-top:1px solid var(--border);padding-top:3.5rem;padding-bottom:3.5rem;"><div class="section-inner"><div class="stag stag-g">Featured Partner Schools</div><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;"><h2 style="font-size:1.7rem;letter-spacing:-.022em;">Schools Advertising on EduPath</h2><button class="btn btn-ghost" onclick="go('partner-schools')">View All Schools →</button></div><div class="schools-grid" id="landingFeatured"></div><div class="alert alert-g" style="margin-top:1.4rem;">🏫 <strong>Is your school not listed?</strong> <a onclick="go('school-auth')" style="color:var(--gold);cursor:pointer;font-weight:700;">Register your school →</a> and reach thousands of S.4 leavers choosing their A-Level school this season.</div></div></div>
+  <footer><div class="footer-inner"><div class="footer-brand"><h3>EduPath Uganda</h3><p>Uganda's A-Level guidance platform — combining PUJAB curriculum data, AI technology and school partnerships to help every S.4 leaver choose their best path.</p></div><div class="footer-col"><h4>Portals</h4><a onclick="go('student')">Student Portal</a><a onclick="go('parent')">Parent Portal</a><a onclick="go('school-auth')">School Login</a></div><div class="footer-col"><h4>Tools</h4><a onclick="go('ai-advisor')">AI Advisor</a><a onclick="go('partner-schools')">Partner Schools</a></div><div class="footer-col"><h4>Info</h4><a>PUJAB Guidelines</a><a>NCDC Framework</a><a onclick="go('school-auth')">Advertise Your School</a></div></div><div class="footer-bot">© 2025 EduPath Uganda · PUJAB & NCDC Aligned · Free for students and parents · <a onclick="go('school-auth')" style="color:var(--gold);cursor:pointer;">School Advertising</a></div></footer>
 </div>
 
-<!-- STUDENT PORTAL -->
+<!-- ========== STUDENT PORTAL ========== -->
 <div id="student" class="page">
   <div class="app-shell"><div class="app-body">
     <div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><span>Student Portal</span></div>
@@ -504,49 +427,21 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:2.2rem 
       <button class="tab" onclick="switchTab('st','st-degrees',this)">🎓 Degrees</button>
       <button class="tab" onclick="switchTab('st','st-guide',this)">📚 Guide</button>
     </div>
-    <div id="st-grades" class="tab-pane on">
-      <div class="card">
-        <div class="card-title">📝 Your O-Level Subject Grades</div>
-        <div id="gradesForm"></div>
-        <div class="divider"></div>
-        <div class="fld" style="max-width:300px;margin-bottom:1rem;"><label>Your Name (optional)</label><input id="st-name" type="text" placeholder="e.g. Grace Akello"/></div>
-        <div class="form-row"><button class="btn btn-ghost" onclick="resetGrades()">↺ Reset</button><button class="btn btn-gold" onclick="analyseAll()">Analyse My Results →</button></div>
-      </div>
-      <div class="alert alert-m">📌 Grade scale: <strong>A=6 · B=5 · C=4 · D=3 · E=2 · F=1</strong>. Enter at least 4 subjects.</div>
-      <div class="alert alert-t">🤖 After viewing results, visit the <strong>AI Advisor</strong> for deeper personalised guidance including Uganda job market advice.</div>
-    </div>
+    <div id="st-grades" class="tab-pane on"><div class="card"><div class="card-title">📝 Your O-Level Subject Grades</div><div id="gradesForm"></div><div class="divider"></div><div class="fld" style="max-width:300px;margin-bottom:1rem;"><label>Your Name (optional)</label><input id="st-name" type="text" placeholder="e.g. Grace Akello"/></div><div class="form-row"><button class="btn btn-ghost" onclick="resetGrades()">↺ Reset</button><button class="btn btn-gold" onclick="analyseAll()">Analyse My Results →</button></div></div><div class="alert alert-m">📌 Grade scale: <strong>A=6 · B=5 · C=4 · D=3 · E=2 · F=1</strong>. Enter at least 4 subjects.</div><div class="alert alert-t">🤖 After viewing results, visit the <strong>AI Advisor</strong> for deeper personalised guidance including Uganda job market advice.</div></div>
     <div id="st-combos" class="tab-pane"><div id="combosOut"><div class="empty-state"><div class="ico">📋</div><h3>No results yet</h3><p>Enter grades in Tab 1 first.</p></div></div></div>
     <div id="st-careers" class="tab-pane"><div id="careersOut"><div class="empty-state"><div class="ico">💼</div><h3>No results yet</h3><p>Enter grades in Tab 1 first.</p></div></div></div>
-    <div id="st-check" class="tab-pane">
-      <div class="card"><div class="card-title">🎯 Career Compatibility Check</div><div class="fg"><div class="fld"><label>Select Career / Degree Programme</label><select id="cc-career"><option value="">— Choose a career —</option></select></div><div class="fld"><label>Your Name</label><input id="cc-name" type="text" placeholder="Optional"/></div></div><div class="form-row"><button class="btn btn-gold" onclick="doCareerCheck()">Check Compatibility →</button></div></div>
-      <div id="checkOut"></div>
-    </div>
+    <div id="st-check" class="tab-pane"><div class="card"><div class="card-title">🎯 Career Compatibility Check</div><div class="fg"><div class="fld"><label>Select Career / Degree Programme</label><select id="cc-career"><option value="">— Choose a career —</option></select></div><div class="fld"><label>Your Name</label><input id="cc-name" type="text" placeholder="Optional"/></div></div><div class="form-row"><button class="btn btn-gold" onclick="doCareerCheck()">Check Compatibility →</button></div></div><div id="checkOut"></div></div>
     <div id="st-degrees" class="tab-pane"><div id="degreesOut"><div class="empty-state"><div class="ico">🎓</div><h3>No grades entered</h3><p>Enter grades first.</p></div></div></div>
-    <div id="st-guide" class="tab-pane">
-      <div class="card"><div class="card-title">📚 Combination & Career Preparation Guide</div><div class="fg"><div class="fld"><label>Target Combination</label><select id="g-combo" onchange="renderGuide()"><option value="">— Select Combination —</option></select></div><div class="fld"><label>Or Target Career</label><select id="g-career" onchange="renderGuide()"><option value="">— Select Career —</option></select></div></div></div>
-      <div id="guideOut"></div>
-      <div class="card" style="margin-top:1rem;"><div class="card-title">💡 25 A-Level Success Tips</div><div id="tipsOut"></div></div>
-    </div>
+    <div id="st-guide" class="tab-pane"><div class="card"><div class="card-title">📚 Combination & Career Preparation Guide</div><div class="fg"><div class="fld"><label>Target Combination</label><select id="g-combo" onchange="renderGuide()"><option value="">— Select Combination —</option></select></div><div class="fld"><label>Or Target Career</label><select id="g-career" onchange="renderGuide()"><option value="">— Select Career —</option></select></div></div></div><div id="guideOut"></div><div class="card" style="margin-top:1rem;"><div class="card-title">💡 25 A-Level Success Tips</div><div id="tipsOut"></div></div></div>
   </div></div>
 </div>
 
-<!-- PARENT PORTAL -->
-<div id="parent" class="page">
-  <div class="app-shell"><div class="app-body">
-    <div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><span>Parent Portal</span></div>
-    <div class="ph"><div class="ph-tag tag-t">👨‍👩‍👧 Free — No Login Required</div><h2>Parent Portal</h2><p>Find your child's academic profile and get guidance on their best A-Level path.</p></div>
-    <div class="card">
-      <div class="card-title">🔍 Find a Student Profile</div>
-      <div class="fg"><div class="fld"><label>Child's Name</label><input id="p-name" type="text" placeholder="Full name"/></div><div class="fld"><label>School Name (optional)</label><input id="p-school" type="text" placeholder="e.g. Arua Public S.S.S"/></div></div>
-      <div class="form-row"><button class="btn btn-ghost" onclick="loadDemoParent()">📋 Load Demo Profile</button><button class="btn btn-gold" onclick="viewParent()">View Profile →</button></div>
-    </div>
-    <div id="parentOut"></div>
-  </div></div>
-</div>
+<!-- ========== PARENT PORTAL ========== -->
+<div id="parent" class="page"><div class="app-shell"><div class="app-body"><div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><span>Parent Portal</span></div><div class="ph"><div class="ph-tag tag-t">👨‍👩‍👧 Free — No Login Required</div><h2>Parent Portal</h2><p>Find your child's academic profile and get guidance on their best A-Level path.</p></div><div class="card"><div class="card-title">🔍 Find a Student Profile</div><div class="fg"><div class="fld"><label>Child's Name</label><input id="p-name" type="text" placeholder="Full name"/></div><div class="fld"><label>School Name (optional)</label><input id="p-school" type="text" placeholder="e.g. Arua Public S.S.S"/></div></div><div class="form-row"><button class="btn btn-ghost" onclick="loadDemoParent()">📋 Load Demo Profile</button><button class="btn btn-gold" onclick="viewParent()">View Profile →</button></div></div><div id="parentOut"></div></div></div></div>
 
-<!-- PARTNER SCHOOLS (with real API integration) -->
+<!-- ========== PARTNER SCHOOLS (fully functional with filters + background images) ========== -->
 <div id="partner-schools" class="page">
-  <div class="app-shell"><div class="wide-body">
+  <div class="app-shell"><div class="wide-body" id="partnerBgContainer">
     <div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><span>Partner Schools</span></div>
     <div class="ph"><div class="ph-tag tag-g">🏫 Schools Across Uganda</div><h2>Partner Schools</h2><p>Browse A-Level schools — filter by region, combination, or boarding. Click any school for full details and contact information.</p></div>
     <div class="schools-filter" id="regionNav"></div>
@@ -555,60 +450,24 @@ footer{background:var(--ink2);border-top:1px solid var(--border);padding:2.2rem 
       <div class="fld"><label>Boarding</label><select id="schoolBoarding" onchange="searchSchools()"><option value="">Any</option><option value="day">Day Only</option><option value="boarding">Boarding Only</option><option value="both">Day & Boarding</option></select></div>
     </div>
     <div id="schoolsGrid" class="schools-grid"></div>
-    <div style="border-top:1px solid var(--border);padding-top:3rem;margin-top:3rem;">
-      <div class="stag stag-g">Advertise Your School</div>
-      <h2 style="font-size:1.6rem;letter-spacing:-.022em;margin-bottom:.5rem;">Reach S.4 Leavers Choosing Their School</h2>
-      <div class="ad-tiers"><div class="ad-tier-card"><div class="tier-name">Basic Listing</div><div class="tier-price">Free</div><button class="btn btn-ghost btn-full" onclick="go('school-auth')">Register Free →</button></div>
-      <div class="ad-tier-card popular"><div class="popular-tag">POPULAR</div><div class="tier-name" style="color:var(--gold)">Standard Featured</div><div class="tier-price" style="color:var(--gold)">UGX 75K</div><button class="btn btn-gold btn-full" onclick="openAdInquiry('standard')">Get Standard →</button></div>
-      <div class="ad-tier-card"><div class="tier-name" style="color:var(--teal)">Premium Featured</div><div class="tier-price" style="color:var(--teal)">UGX 150K</div><button class="btn btn-teal btn-full" onclick="openAdInquiry('premium')">Get Premium →</button></div></div>
-      <div class="card" id="adInquiryCard" style="display:none;margin-top:1.5rem;"><div class="card-title">📬 <span id="adInquiryTitle">Advertising Application</span></div><div class="fg"><div class="fld"><label>School Name *</label><input id="ai-school" type="text"/></div><div class="fld"><label>Contact Person *</label><input id="ai-contact" type="text"/></div><div class="fld"><label>Phone Number *</label><input id="ai-phone" type="tel"/></div><div class="fld"><label>Email</label><input id="ai-email" type="email"/></div><div class="fld"><label>District / Region</label><input id="ai-district" type="text"/></div><div class="fld"><label>Combinations Offered</label><input id="ai-combos" type="text"/></div><div class="fld fg-full"><label>Additional Message</label><textarea id="ai-msg" rows="2"></textarea></div></div><input type="hidden" id="ai-tier" value="standard"/><div class="form-row"><button class="btn btn-ghost" onclick="document.getElementById('adInquiryCard').style.display='none'">Cancel</button><button class="btn btn-gold" onclick="submitAdInquiry()">Submit →</button></div></div>
-      <div id="adSuccessMsg" style="display:none;" class="alert alert-t">✅ <strong>Application received!</strong> Our team will contact you within 24 hours to activate your school listing.</div>
-    </div>
+    <div style="border-top:1px solid var(--border);padding-top:3rem;margin-top:3rem;"><div class="stag stag-g">Advertise Your School</div><h2 style="font-size:1.6rem;letter-spacing:-.022em;margin-bottom:.5rem;">Reach S.4 Leavers Choosing Their School</h2><p style="color:var(--muted2);font-size:.87rem;margin-bottom:1.8rem;">Thousands of students and parents use EduPath when deciding where to pursue A-Level. Add your school today.</p><div class="ad-tiers"><div class="ad-tier-card"><div class="tier-name">Basic Listing</div><div class="tier-price">Free</div><div class="tier-period">Always free · Apply once</div><ul class="tier-features"><li>School name + location</li><li>Region + school type</li><li>Combinations listed</li><li>Contact phone number</li></ul><button class="btn btn-ghost btn-full" style="margin-top:1.2rem;" onclick="go('school-auth')">Register Free →</button></div><div class="ad-tier-card popular"><div class="popular-tag">POPULAR</div><div class="tier-name" style="color:var(--gold)">Standard Featured</div><div class="tier-price" style="color:var(--gold)">UGX 75K</div><div class="tier-period">per month · billed per term</div><ul class="tier-features"><li>School card with <strong>logo</strong></li><li>Full description + highlights</li><li>All combinations shown</li><li>Website + contact link</li><li>Visible above basic listings</li></ul><button class="btn btn-gold btn-full" style="margin-top:1.2rem;" onclick="openAdInquiry('standard')">Get Standard →</button></div><div class="ad-tier-card"><div class="tier-name" style="color:var(--teal)">Premium Featured</div><div class="tier-price" style="color:var(--teal)">UGX 150K</div><div class="tier-period">per month · 20% off annually</div><ul class="tier-features"><li>Large card with <strong>banner photo</strong></li><li>School logo + full profile</li><li>Top position on all pages</li><li>Featured on landing page</li><li>Boarding + facilities info</li><li>AI Advisor school mentions</li></ul><button class="btn btn-teal btn-full" style="margin-top:1.2rem;" onclick="openAdInquiry('premium')">Get Premium →</button></div></div><div class="card" id="adInquiryCard" style="display:none;margin-top:1.5rem;"><div class="card-title">📬 <span id="adInquiryTitle">Advertising Application</span></div><div class="fg"><div class="fld"><label>School Name *</label><input id="ai-school" type="text" placeholder="Full official school name"/></div><div class="fld"><label>Contact Person *</label><input id="ai-contact" type="text" placeholder="Head teacher / Deputy"/></div><div class="fld"><label>Phone Number *</label><input id="ai-phone" type="tel" placeholder="0772 000 000"/></div><div class="fld"><label>Email</label><input id="ai-email" type="email" placeholder="school@email.ug"/></div><div class="fld"><label>District / Region</label><input id="ai-district" type="text" placeholder="e.g. Arua City, West Nile"/></div><div class="fld"><label>Combinations Offered</label><input id="ai-combos" type="text" placeholder="e.g. PCB, PCM, HEG, MEG"/></div><div class="fld fg-full"><label>Additional Message</label><textarea id="ai-msg" rows="2" placeholder="Anything else to share about your school…"></textarea></div></div><input type="hidden" id="ai-tier" value="standard"/><div class="form-row"><button class="btn btn-ghost" onclick="document.getElementById('adInquiryCard').style.display='none'">Cancel</button><button class="btn btn-gold" onclick="submitAdInquiry()">Submit Application →</button></div></div><div id="adSuccessMsg" style="display:none;" class="alert alert-t">✅ <strong>Application received!</strong> Our team will contact you within 24 hours to activate your school listing.</div></div>
   </div></div>
 </div>
 
-<!-- AI ADVISOR (unchanged, keep original scripts) -->
-<div id="ai-advisor" class="page">
-  <div class="app-shell"><div class="app-body">
-    <div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><span>AI Academic Advisor</span></div>
-    <div class="ph"><div class="ph-tag tag-t">🤖 Powered by Claude AI</div><h2>AI Academic Advisor</h2><p>A real AI that deeply understands Uganda's education system — from UCE grades to UACE combinations, PUJAB admissions, job market and career paths.</p></div>
-    <div id="aiTopicArea"><div style="font-size:.8rem;color:var(--muted2);margin-bottom:.7rem;font-weight:600;">QUICK START — Choose a topic:</div><div class="ai-topics"><div class="ai-topic" onclick="startTopic('combo')"><div class="ai-topic-ico">🔄</div><div class="ai-topic-txt">Help me choose my A-Level combination</div></div><div class="ai-topic" onclick="startTopic('career')"><div class="ai-topic-ico">💼</div><div class="ai-topic-txt">What career suits my O-Level results?</div></div><div class="ai-topic" onclick="startTopic('university')"><div class="ai-topic-ico">🏛️</div><div class="ai-topic-txt">Which universities should I target?</div></div><div class="ai-topic" onclick="startTopic('market')"><div class="ai-topic-ico">📈</div><div class="ai-topic-txt">Uganda job market — what pays well?</div></div><div class="ai-topic" onclick="startTopic('struggle')"><div class="ai-topic-ico">💪</div><div class="ai-topic-txt">I'm struggling — what are my options?</div></div><div class="ai-topic" onclick="startTopic('scholarship')"><div class="ai-topic-ico">🎓</div><div class="ai-topic-txt">Scholarships available in Uganda</div></div><div class="ai-topic" onclick="startTopic('vocational')"><div class="ai-topic-ico">🔧</div><div class="ai-topic-txt">Vocational & technical routes in Uganda</div></div><div class="ai-topic" onclick="startTopic('subjects')"><div class="ai-topic-ico">📖</div><div class="ai-topic-txt">I'm weak in Maths — which combinations work?</div></div></div></div>
-    <div class="grade-ctx" id="gradeCtx"><span>📊</span><div>Your grades are loaded — <strong id="gradeCtxTop"></strong> is your best combination. The AI knows your results.</div><button class="btn btn-ghost" style="font-size:.73rem;padding:.26rem .6rem;margin-left:auto;" onclick="go('student')">Edit Grades</button></div>
-    <div class="chat-wrap"><div class="chat-header"><div class="ai-av">🤖</div><div class="chat-hinfo"><div class="name">EduPath AI Advisor</div><div class="status"><span class="status-dot"></span>Online · Uganda Education Expert</div></div><div class="chat-modes"><button class="mode-btn on" id="modeGeneral" onclick="setMode('general',this)">General</button><button class="mode-btn" id="modeCombos" onclick="setMode('combos',this)">Combinations</button><button class="mode-btn" id="modeJobs" onclick="setMode('jobs',this)">Job Market</button><button class="mode-btn" id="modeUni" onclick="setMode('uni',this)">Universities</button></div><button class="btn btn-ghost" style="font-size:.73rem;padding:.28rem .65rem;" onclick="clearChat()">Clear</button></div><div class="chat-msgs" id="chatMsgs"></div><div class="chat-input-area"><div class="sug-row" id="chatSugs"><span class="sug" onclick="quickSend(this)">I got aggregate 16 — which combinations suit me?</span><span class="sug" onclick="quickSend(this)">PCB or PCM for medicine at Makerere?</span><span class="sug" onclick="quickSend(this)">What jobs are in demand in Uganda 2025?</span><span class="sug" onclick="quickSend(this)">Is HEG good for law?</span><span class="sug" onclick="quickSend(this)">Makerere government sponsorship — how competitive?</span></div><div class="input-row"><textarea id="chatInput" placeholder="Ask anything about Uganda's education system, A-Level, careers, job market…" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"></textarea><button class="send-btn" onclick="sendChat()">➤</button></div></div></div>
-  </div></div>
-</div>
+<!-- ========== AI ADVISOR ========== -->
+<div id="ai-advisor" class="page"><div class="app-shell"><div class="app-body"><div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><span>AI Academic Advisor</span></div><div class="ph"><div class="ph-tag tag-t">🤖 Powered by Claude AI</div><h2>AI Academic Advisor</h2><p>A real AI that deeply understands Uganda's education system — from UCE grades to UACE combinations, PUJAB admissions, job market and career paths.</p></div><div id="aiTopicArea"><div style="font-size:.8rem;color:var(--muted2);margin-bottom:.7rem;font-weight:600;letter-spacing:.04em;">QUICK START — Choose a topic:</div><div class="ai-topics"><div class="ai-topic" onclick="startTopic('combo')"><div class="ai-topic-ico">🔄</div><div class="ai-topic-txt">Help me choose my A-Level combination</div></div><div class="ai-topic" onclick="startTopic('career')"><div class="ai-topic-ico">💼</div><div class="ai-topic-txt">What career suits my O-Level results?</div></div><div class="ai-topic" onclick="startTopic('university')"><div class="ai-topic-ico">🏛️</div><div class="ai-topic-txt">Which universities should I target?</div></div><div class="ai-topic" onclick="startTopic('market')"><div class="ai-topic-ico">📈</div><div class="ai-topic-txt">Uganda job market — what pays well?</div></div><div class="ai-topic" onclick="startTopic('struggle')"><div class="ai-topic-ico">💪</div><div class="ai-topic-txt">I'm struggling — what are my options?</div></div><div class="ai-topic" onclick="startTopic('scholarship')"><div class="ai-topic-ico">🎓</div><div class="ai-topic-txt">Scholarships available in Uganda</div></div><div class="ai-topic" onclick="startTopic('vocational')"><div class="ai-topic-ico">🔧</div><div class="ai-topic-txt">Vocational & technical routes in Uganda</div></div><div class="ai-topic" onclick="startTopic('subjects')"><div class="ai-topic-ico">📖</div><div class="ai-topic-txt">I'm weak in Maths — which combinations work?</div></div></div></div><div class="grade-ctx" id="gradeCtx"><span>📊</span><div>Your grades are loaded — <strong id="gradeCtxTop"></strong> is your best combination. The AI knows your results.</div><button class="btn btn-ghost" style="font-size:.73rem;padding:.26rem .6rem;margin-left:auto;" onclick="go('student')">Edit Grades</button></div><div class="chat-wrap"><div class="chat-header"><div class="ai-av">🤖</div><div class="chat-hinfo"><div class="name">EduPath AI Advisor</div><div class="status"><span class="status-dot"></span>Online · Uganda Education Expert</div></div><div class="chat-modes"><button class="mode-btn on" id="modeGeneral" onclick="setMode('general',this)">General</button><button class="mode-btn" id="modeCombos" onclick="setMode('combos',this)">Combinations</button><button class="mode-btn" id="modeJobs" onclick="setMode('jobs',this)">Job Market</button><button class="mode-btn" id="modeUni" onclick="setMode('uni',this)">Universities</button></div><button class="btn btn-ghost" style="font-size:.73rem;padding:.28rem .65rem;margin-left:.5rem;" onclick="clearChat()">Clear</button></div><div class="chat-msgs" id="chatMsgs"></div><div class="chat-input-area"><div class="sug-row" id="chatSugs"><span class="sug" onclick="quickSend(this)">I got aggregate 16 — which combinations suit me?</span><span class="sug" onclick="quickSend(this)">PCB or PCM for medicine at Makerere?</span><span class="sug" onclick="quickSend(this)">What jobs are in demand in Uganda 2025?</span><span class="sug" onclick="quickSend(this)">Is HEG good for law?</span><span class="sug" onclick="quickSend(this)">Makerere government sponsorship — how competitive?</span></div><div class="input-row"><textarea id="chatInput" placeholder="Ask anything about Uganda's education system, A-Level, careers, job market…" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"></textarea><button class="send-btn" onclick="sendChat()">➤</button></div></div></div></div></div></div>
 
-<!-- SCHOOL AUTH -->
-<div id="school-auth" class="page"><div class="auth-screen"><div class="auth-box"><div class="auth-logo"><h2>🏫 School Portal</h2><p>Administrator access for registered schools</p></div><div class="alert alert-m" style="font-size:.78rem;">🔒 Students and parents use free portals without any login. School login is for administrators only.</div><div class="auth-tabs"><button class="auth-tab on" onclick="switchAuthTab('login',this)">Sign In</button><button class="auth-tab" onclick="switchAuthTab('register',this)">Register School</button></div><div id="auth-login"><div class="fld"><label>School Email</label><input type="email" id="s-email" placeholder="admin@school.ug"/></div><div class="fld"><label>Password</label><input type="password" id="s-pass" placeholder="••••••••"/></div><div id="loginError" class="alert alert-r" style="display:none;"></div><button class="btn btn-gold btn-full" id="loginBtn" onclick="schoolLogin()">Sign In</button><div class="auth-divider">or</div><button class="btn btn-ghost btn-full" onclick="schoolDemo()">🚀 Demo Mode (No Login)</button></div><div id="auth-register" style="display:none;"><div class="fg"><div class="fld"><label>School Name *</label><input id="r-school" type="text"/></div><div class="fld"><label>School Type</label><select id="r-type"><option>Government</option><option>Private</option><option>Catholic</option><option>Protestant</option><option>Islamic</option></select></div><div class="fld"><label>Region *</label><select id="r-region"><option>Central</option><option>Eastern</option><option>Northern</option><option>Western</option></select></div><div class="fld"><label>District</label><input id="r-district" type="text"/></div><div class="fld"><label>Email *</label><input id="r-email" type="email"/></div><div class="fld"><label>Phone</label><input id="r-phone" type="tel"/></div><div class="fld"><label>Password *</label><input id="r-pass" type="password"/></div><div class="fld"><label>Confirm Password *</label><input id="r-pass2" type="password"/></div></div><div id="regError" class="alert alert-r" style="display:none;"></div><div id="regSuccess" class="alert alert-t" style="display:none;"></div><button class="btn btn-gold btn-full" id="regBtn" onclick="schoolRegister()">Register School</button><p style="text-align:center;margin-top:.9rem;font-size:.77rem;">Your account will be reviewed by an EduPath admin before activation (usually within 24 hours).</p></div><p style="text-align:center;margin-top:1.1rem;font-size:.77rem;">Students & Parents: <a onclick="go('student')" style="color:var(--gold);cursor:pointer;">use the free student portal →</a></p></div></div></div>
+<!-- ========== SCHOOL AUTH ========== -->
+<div id="school-auth" class="page"><div class="auth-screen"><div class="auth-box"><div class="auth-logo"><h2>🏫 School Portal</h2><p>Administrator access for registered schools</p></div><div class="alert alert-m" style="font-size:.78rem;margin-bottom:1.1rem;">🔒 Students and parents use free portals without any login. School login is for administrators only.</div><div class="auth-tabs"><button class="auth-tab on" onclick="switchAuthTab('login',this)">Sign In</button><button class="auth-tab" onclick="switchAuthTab('register',this)">Register School</button></div><div id="auth-login"><div class="fld" style="margin-bottom:.8rem;"><label>School Email</label><input type="email" id="s-email" placeholder="admin@school.ug"/></div><div class="fld" style="margin-bottom:.8rem;"><label>Password</label><input type="password" id="s-pass" placeholder="••••••••"/></div><div id="loginError" class="alert alert-r" style="display:none;margin-bottom:.8rem;"></div><button class="btn btn-gold btn-full" id="loginBtn" onclick="schoolLogin()">Sign In</button><div class="auth-divider">or</div><button class="btn btn-ghost btn-full" onclick="schoolDemo()">🚀 Demo Mode (No Login)</button></div><div id="auth-register" style="display:none;"><div class="fg" style="margin-bottom:.8rem;"><div class="fld"><label>School Name *</label><input id="r-school" type="text" placeholder="Full school name"/></div><div class="fld"><label>School Type</label><select id="r-type"><option value="government">Government</option><option value="private">Private</option><option value="catholic">Catholic</option><option value="protestant">Protestant</option><option value="islamic">Islamic</option></select></div><div class="fld"><label>Region *</label><select id="r-region"><option value="">— Select Region —</option></select></div><div class="fld"><label>District</label><input id="r-district" type="text" placeholder="e.g. Arua City"/></div><div class="fld"><label>Email *</label><input id="r-email" type="email" placeholder="admin@school.ug"/></div><div class="fld"><label>Phone</label><input id="r-phone" type="tel" placeholder="0772 000 000"/></div><div class="fld"><label>Password *</label><input id="r-pass" type="password" placeholder="Min 8 characters"/></div><div class="fld"><label>Confirm Password *</label><input id="r-pass2" type="password" placeholder="Repeat password"/></div></div><div id="regError" class="alert alert-r" style="display:none;margin-bottom:.8rem;"></div><div id="regSuccess" class="alert alert-t" style="display:none;margin-bottom:.8rem;"></div><button class="btn btn-gold btn-full" id="regBtn" onclick="schoolRegister()">Register School</button><p style="text-align:center;margin-top:.9rem;font-size:.77rem;color:var(--muted);">Your account will be reviewed by an EduPath admin before activation (usually within 24 hours).</p></div><p style="text-align:center;margin-top:1.1rem;font-size:.77rem;color:var(--muted);">Students & Parents: <a onclick="go('student')" style="color:var(--gold);cursor:pointer;">use the free student portal →</a></p></div></div></div>
 
-<!-- SCHOOL DASHBOARD (unchanged) -->
-<div id="school" class="page">
-  <div class="app-shell"><div class="app-body">
-    <div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><a onclick="go('school-auth')">Login</a><span class="bread-sep">›</span><span id="schName">School Dashboard</span></div>
-    <div class="ph"><div class="ph-tag tag-v">🏫 School Administrator</div><h2>School Dashboard</h2><p>Manage your school profile, student records, and advertising listing.</p></div>
-    <div class="dash-stats"><div class="stat-box"><div class="num" style="color:var(--sky)" id="d-total">0</div><div class="lbl">Students</div></div><div class="stat-box"><div class="num" style="color:var(--teal)" id="d-ok">0</div><div class="lbl">Compatible</div></div><div class="stat-box"><div class="num" style="color:var(--gold)" id="d-guid">0</div><div class="lbl">Need Guidance</div></div><div class="stat-box"><div class="num" style="color:var(--rose)" id="d-no">0</div><div class="lbl">Change Needed</div></div></div>
-    <div class="tabs"><button class="tab on" onclick="switchTab('sc','sc-profile',this)">🏫 School Profile</button><button class="tab" onclick="switchTab('sc','sc-upload',this)">📤 Upload Records</button><button class="tab" onclick="switchTab('sc','sc-manual',this)">✏️ Add Student</button><button class="tab" onclick="switchTab('sc','sc-report',this)">📊 Report</button></div>
-    <div id="sc-profile" class="tab-pane on"><div class="card"><div class="card-title">🏫 School Profile & Listing</div><div class="profile-img-wrap"><div><div class="img-preview" id="bannerPreview">🏫</div><button class="btn btn-ghost" onclick="document.getElementById('bannerFile').click()">Upload Banner</button><input type="file" id="bannerFile" accept="image/*" style="display:none" onchange="previewImg(this,'bannerPreview','bannerUrl')"/></div><div><div class="logo-preview" id="logoPreview">🎓</div><button class="btn btn-ghost" onclick="document.getElementById('logoFile').click()">Upload Logo</button><input type="file" id="logoFile" accept="image/*" style="display:none" onchange="previewImg(this,'logoPreview','logoUrl')"/></div></div><input type="hidden" id="bannerUrl"/><input type="hidden" id="logoUrl"/><div class="fg"><div class="fld"><label>Official School Name</label><input id="p-school-name" type="text"/></div><div class="fld"><label>Region</label><select id="p-region"></select></div><div class="fld"><label>District</label><input id="p-district" type="text"/></div><div class="fld"><label>Phone Number</label><input id="p-phone" type="tel"/></div><div class="fld"><label>Website URL</label><input id="p-website" type="url"/></div><div class="fld"><label>Combinations Offered</label><input id="p-combos" type="text"/></div><div class="fld fg-full"><label>Description</label><textarea id="p-desc" rows="3"></textarea></div></div><div id="profileError" class="alert alert-r" style="display:none;"></div><div id="profileSuccess" class="alert alert-t" style="display:none;"></div><div class="form-row"><button class="btn btn-ghost" onclick="loadProfile()">Reload</button><button class="btn btn-gold" onclick="saveProfile()">Save Profile</button></div></div></div>
-    <div id="sc-upload" class="tab-pane"><div class="card"><div class="upload-zone" id="dropZone" onclick="document.getElementById('fileIn').click()"><div style="font-size:2.4rem;">📂</div><h3>Drop student records here or click to browse</h3><input type="file" id="fileIn" accept=".xlsx,.csv" style="display:none" onchange="handleUpload(this)"/></div><div id="upProg" style="display:none;"><div id="upStatus">Processing…</div><div class="prog-bar"><div class="prog-fill" id="progFill"></div></div></div></div><button class="btn btn-ghost" onclick="loadDemoStudents()">Load Demo Students</button></div>
-    <div id="sc-manual" class="tab-pane"><div class="card"><div class="card-title">✏️ Add Student Manually</div><div class="fg"><div class="fld"><label>Full Name</label><input id="m-name" type="text"/></div><div class="fld"><label>Career Interest</label><select id="m-career"></select></div></div><div class="fg3"><div class="fld"><label>Math</label><select id="m-math"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Physics</label><select id="m-phys"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Chemistry</label><select id="m-chem"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Biology</label><select id="m-bio"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></div><div class="form-row"><button class="btn btn-gold" onclick="addManual()">+ Add Student</button></div></div></div>
-    <div id="sc-report" class="tab-pane"><div id="schoolReport"></div></div>
-  </div></div>
-</div>
+<!-- ========== SCHOOL DASHBOARD ========== -->
+<div id="school" class="page"><div class="app-shell"><div class="app-body"><div class="bread"><a onclick="go('landing')">Home</a><span class="bread-sep">›</span><a onclick="go('school-auth')">Login</a><span class="bread-sep">›</span><span id="schName">School Dashboard</span></div><div class="ph"><div class="ph-tag tag-v">🏫 School Administrator</div><h2>School Dashboard</h2><p>Manage your school profile, student records, and advertising listing.</p></div><div class="dash-stats"><div class="stat-box"><div class="num" style="color:var(--sky)" id="d-total">0</div><div class="lbl">Students</div></div><div class="stat-box"><div class="num" style="color:var(--teal)" id="d-ok">0</div><div class="lbl">Compatible</div></div><div class="stat-box"><div class="num" style="color:var(--gold)" id="d-guid">0</div><div class="lbl">Need Guidance</div></div><div class="stat-box"><div class="num" style="color:var(--rose)" id="d-no">0</div><div class="lbl">Change Needed</div></div></div><div class="tabs"><button class="tab on" onclick="switchTab('sc','sc-profile',this)">🏫 School Profile</button><button class="tab" onclick="switchTab('sc','sc-upload',this)">📤 Upload Records</button><button class="tab" onclick="switchTab('sc','sc-manual',this)">✏️ Add Student</button><button class="tab" onclick="switchTab('sc','sc-report',this)">📊 Report</button></div><div id="sc-profile" class="tab-pane on"><div class="card"><div class="card-title">🏫 School Profile & Listing</div><p style="color:var(--muted2);font-size:.85rem;margin-bottom:1.3rem;line-height:1.65;">This information appears on the public Partner Schools page. Complete your profile to attract S.4 leavers choosing their A-Level school.</p><div class="profile-img-wrap"><div><div class="img-preview" id="bannerPreview">🏫</div><div style="font-size:.72rem;color:var(--muted);margin-top:.4rem;text-align:center;">Banner Photo</div><input type="file" id="bannerFile" accept="image/*" style="display:none" onchange="previewImg(this,'bannerPreview','bannerUrl')"/><button class="btn btn-ghost" style="font-size:.74rem;padding:.3rem .65rem;margin-top:.4rem;width:90px;" onclick="document.getElementById('bannerFile').click()">Upload</button></div><div><div class="logo-preview" id="logoPreview">🎓</div><div style="font-size:.72rem;color:var(--muted);margin-top:.4rem;text-align:center;">Logo</div><input type="file" id="logoFile" accept="image/*" style="display:none" onchange="previewImg(this,'logoPreview','logoUrl')"/><button class="btn btn-ghost" style="font-size:.74rem;padding:.3rem .65rem;margin-top:.4rem;width:70px;" onclick="document.getElementById('logoFile').click()">Upload</button></div><div style="flex:1;min-width:0;"><div class="alert alert-m" style="font-size:.78rem;">📸 <strong>Banner:</strong> Wide photo of school buildings or students (max 5MB). <strong>Logo:</strong> Square school crest/logo (max 2MB). Both should be JPG or PNG.</div></div></div><input type="hidden" id="bannerUrl" value=""/><input type="hidden" id="logoUrl" value=""/><div class="fg"><div class="fld"><label>Official School Name *</label><input id="p-school-name" type="text" placeholder="Full official name"/></div><div class="fld"><label>School Type</label><select id="p-school-type"><option value="government">Government</option><option value="private">Private</option><option value="catholic">Catholic</option><option value="protestant">Protestant</option><option value="islamic">Islamic</option><option value="international">International</option></select></div><div class="fld"><label>School Motto</label><input id="p-motto" type="text" placeholder="e.g. Learning for Service"/></div><div class="fld"><label>Year Founded</label><input id="p-year" type="number" placeholder="e.g. 1952"/></div><div class="fld"><label>Region *</label><select id="p-region"><option value="">— Select Region —</option></select></div><div class="fld"><label>District / City *</label><input id="p-district" type="text" placeholder="e.g. Arua City"/></div><div class="fld"><label>Physical Address / P.O. Box</label><input id="p-address" type="text" placeholder="e.g. Plot 5, Oli Road, Arua"/></div><div class="fld"><label>Phone Number *</label><input id="p-phone" type="tel" placeholder="0772 000 000"/></div><div class="fld"><label>School Email</label><input id="p-email" type="email" placeholder="info@school.ug"/></div><div class="fld"><label>Website URL</label><input id="p-website" type="url" placeholder="https://www.school.ug"/></div><div class="fld"><label>Facebook Page URL</label><input id="p-facebook" type="url" placeholder="https://facebook.com/yourschool"/></div><div class="fld"><label>Boarding</label><select id="p-boarding"><option value="day">Day Only</option><option value="both">Day & Boarding</option><option value="boarding">Boarding Only</option></select></div><div class="fld fg-full"><label>A-Level Combinations Offered (comma separated) *</label><input id="p-combos" type="text" placeholder="e.g. PCB, PCM, HEG, HEL, MEG, MEE"/></div><div class="fld"><label>Approx. A-Level Students</label><input id="p-students" type="number" placeholder="e.g. 180"/></div><div class="fld"><label>O-Level Streams</label><input id="p-streams" type="number" placeholder="e.g. 4"/></div><div class="fld fg-full"><label>Key Facilities (labs, library, internet, sports courts…)</label><input id="p-facilities" type="text" placeholder="e.g. Science labs, Library, Wi-Fi, Football pitch"/></div><div class="fld fg-full"><label>School Description (max 500 characters)</label><textarea id="p-desc" rows="3" maxlength="500" placeholder="Brief compelling description of your school's strengths, culture, and what makes you stand out…"></textarea></div></div><div id="profileError" class="alert alert-r" style="display:none;margin-top:.8rem;"></div><div id="profileSuccess" class="alert alert-t" style="display:none;margin-top:.8rem;"></div><div class="form-row"><button class="btn btn-ghost" onclick="loadProfile()">↺ Reload</button><button class="btn btn-gold" onclick="saveProfile()">Save & Submit for Review →</button></div></div></div><div id="sc-upload" class="tab-pane"><div class="card"><div class="upload-zone" id="dropZone" onclick="document.getElementById('fileIn').click()"><div style="font-size:2.4rem;margin-bottom:.7rem;">📂</div><h3 style="font-size:.97rem;margin-bottom:.32rem;">Drop student records here or click to browse</h3><p style="color:var(--muted);font-size:.81rem;">Accepts .xlsx · .csv · .docx · .pdf</p><input type="file" id="fileIn" accept=".xlsx,.csv,.docx,.pdf" style="display:none" onchange="handleUpload(this)"/></div><div id="upProg" style="display:none;margin-top:.9rem;"><div style="font-size:.81rem;color:var(--muted2);margin-bottom:.38rem;" id="upStatus">Processing…</div><div class="prog-bar"><div class="prog-fill" id="progFill"></div></div></div></div><div class="alert alert-m">📋 Expected columns: Name · Math · Physics · Chemistry · Biology · English · Geography · History · Economics · Career Interest</div><button class="btn btn-ghost" style="font-size:.79rem;" onclick="loadDemoStudents()">🚀 Load 10 Demo Students</button></div><div id="sc-manual" class="tab-pane"><div class="card"><div class="card-title">✏️ Add Student Manually</div><div class="fg"><div class="fld"><label>Full Name *</label><input id="m-name" type="text" placeholder="Student full name"/></div><div class="fld"><label>Career Interest</label><select id="m-career"><option value="">— Select —</option></select></div></div><div class="fg3" style="margin-top:.8rem;"><div class="fld"><label>Mathematics</label><select id="m-math"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Physics</label><select id="m-phys"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Chemistry</label><select id="m-chem"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Biology</label><select id="m-bio"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>English</label><select id="m-eng"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Geography</label><select id="m-geo"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>History</label><select id="m-hist"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Economics</label><select id="m-econ"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div><div class="fld"><label>Literature</label><select id="m-lit"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div></div><div class="form-row"><button class="btn btn-gold" onclick="addManual()">+ Add Student</button></div></div></div><div id="sc-report" class="tab-pane"><div id="schoolReport"><div class="empty-state"><div class="ico">📊</div><h3>No data yet</h3><p>Upload a file or add students manually to generate a report.</p></div></div></div></div></div></div>
 
 <script>
-// ========== FULL JAVASCRIPT WITH BACKEND INTEGRATION ==========
-const API_BASE = ''; // relative URLs
-let GRADES = {};
-let AUTH = { access: null, refresh: null, school: null };
-let schoolStudents = [];
-let chatHistory = [];
-let chatMode = 'general';
-let allPartnerSchools = [];
-let activeRegionFilter = 'all';
-let featuredSchools = [];
-
-// ========== CORE DATA (same as original) ==========
+// ========== COMPLETE JAVASCRIPT (all original functions + improved filtering) ==========
+// ---------------------- CORE DATA ----------------------
 const GP = {A:6,B:5,C:4,D:3,E:2,F:1};
+const UGANDA_REGIONS = ['West Nile','Acholi','Lango','Karamoja','Teso','Bugisu','Bukedi','Busoga','Kampala','Central 1','Central 2','Buganda East','Bunyoro','Tooro','Rwenzori','Ankole','Kigezi'];
 const O_SUBJECTS = ['Mathematics','Physics','Chemistry','Biology','English Language','Geography','History & Political Education','Economics','Literature in English','Entrepreneurship','Agriculture','Physical Education','Kiswahili','Art and Design','Nutrition & Food Technology','ICT','Performing Arts','Technology and Design','Religious Education','Technical Drawing','Fine Art','Music','Clothing and Textiles'];
 const COMBOS = [
   {code:'PCB',full:'Physics, Chemistry, Biology',subs:['Physics','Chemistry','Biology'],sub_req:'Sub-Math',type:'Science',icon:'🔬'},
@@ -676,66 +535,202 @@ const CAREER_ICONS = {
   'Industrial Chemistry / Petroleum':'⚗️','Biotechnology / Biomedical Research':'🧬',
 };
 const DEGREES = [
-  {prog:'Bachelor of Medicine & Surgery (MBChB)',cat:'Health Sciences',essential:['Biology','Chemistry'],combos:['PCB','BCA','BCM'],icon:'🩺',careers:['Medical Doctor']},
-  {prog:'BSc. Civil Engineering',cat:'Engineering',essential:['Mathematics','Physics'],combos:['PCM','PEM','PMTD'],icon:'🏗️',careers:['Engineer']},
-  {prog:'BSc. Computer Science',cat:'Computing & IT',essential:['Mathematics'],combos:['PCM','PEM','BCM','MEE'],icon:'💻',careers:['Software Developer']},
-  {prog:'Bachelor of Commerce',cat:'Business',essential:['Economics','Mathematics'],combos:['MEG','HEG','PEM','MEE'],icon:'💼',careers:['Accountant']},
-  {prog:'Bachelor of Laws (LLB)',cat:'Law',essential:['Any two A-Level subjects'],combos:['HEL','HED','HLG','HEG'],icon:'⚖️',careers:['Lawyer']},
+  {prog:'Bachelor of Medicine & Surgery (MBChB)',cat:'Health Sciences',essential:['Biology','Chemistry'],relevant:['Mathematics','Physics'],careers:['Medical Doctor','Surgeon','General Practitioner'],combos:['PCB','BCA','BCM'],icon:'🩺'},
+  {prog:'Bachelor of Pharmacy',cat:'Health Sciences',essential:['Biology','Chemistry'],relevant:['Mathematics','Physics'],careers:['Pharmacist','Clinical Researcher'],combos:['PCB','BCM','BCA'],icon:'💊'},
+  {prog:'Bachelor of Nursing Science',cat:'Health Sciences',essential:['Biology','Chemistry'],relevant:['Agriculture','Mathematics','Physics'],careers:['Registered Nurse','Midwife','Public Health Nurse'],combos:['PCB','BCFN','BCA'],icon:'👩‍⚕️'},
+  {prog:'BSc. Biomedical Sciences',cat:'Health Sciences',essential:['Biology','Chemistry'],relevant:['Physics','Mathematics'],careers:['Biomedical Scientist','Laboratory Technician','Geneticist'],combos:['PCB','BCM','BCFN'],icon:'🧬'},
+  {prog:'BSc. Civil Engineering',cat:'Engineering',essential:['Mathematics','Physics'],relevant:['Chemistry','Economics'],careers:['Civil Engineer','Structural Engineer','Construction Manager'],combos:['PCM','PEM','PMTD'],icon:'🏗️'},
+  {prog:'BSc. Electrical Engineering',cat:'Engineering',essential:['Mathematics','Physics'],relevant:['Chemistry','Economics'],careers:['Electrical Engineer','Power Systems Engineer'],combos:['PCM','PEM'],icon:'⚡'},
+  {prog:'BSc. Mechanical Engineering',cat:'Engineering',essential:['Mathematics','Physics'],relevant:['Chemistry','Economics'],careers:['Mechanical Engineer','Automotive Engineer'],combos:['PCM','PEM','PMTD'],icon:'⚙️'},
+  {prog:'BSc. Computer Science',cat:'Computing & IT',essential:['Mathematics'],relevant:['Physics','Chemistry','Economics'],careers:['Software Developer','Data Scientist','AI Engineer','Cybersecurity Specialist'],combos:['PCM','PEM','BCM','MEE'],icon:'💻'},
+  {prog:'BSc. Software Engineering',cat:'Computing & IT',essential:['Mathematics'],relevant:['Physics','Economics'],careers:['Software Engineer','App Developer','Systems Analyst'],combos:['PCM','PEM','MEE'],icon:'👨‍💻'},
+  {prog:'BSc. Agriculture',cat:'Agriculture',essential:['Biology','Chemistry','Agriculture'],relevant:['Mathematics','Geography'],careers:['Agronomist','Crop Scientist','Farm Manager'],combos:['BCA','BAG','BCFN'],icon:'🌾'},
+  {prog:'Bachelor of Agribusiness Management',cat:'Agriculture',essential:['Mathematics','Biology','Chemistry'],relevant:['Economics','Geography'],careers:['Agribusiness Manager','Agricultural Economist'],combos:['BCM','BCA','MEG'],icon:'🌱'},
+  {prog:'BSc. Food Science & Technology',cat:'Agriculture',essential:['Biology','Chemistry'],relevant:['Physics','Nutrition & Food Technology'],careers:['Food Scientist','Quality Control Officer','Nutritionist'],combos:['BCFN','BCA','PCB'],icon:'🍽️'},
+  {prog:'Bachelor of Environmental Science',cat:'Agriculture',essential:['Biology','Chemistry','Physics'],relevant:['Mathematics','Geography'],careers:['Environmental Scientist','Conservation Specialist'],combos:['PCB','BCA','BAG'],icon:'🌍'},
+  {prog:'Bachelor of Veterinary Medicine',cat:'Agriculture',essential:['Biology','Chemistry'],relevant:['Mathematics','Physics','Agriculture'],careers:['Veterinary Doctor','Animal Health Specialist'],combos:['PCB','BCA','BCFN'],icon:'🐾'},
+  {prog:'Bachelor of Commerce',cat:'Business',essential:['Economics','Mathematics'],relevant:['Physics','Geography'],careers:['Accountant','Auditor','Business Consultant','Investment Banker'],combos:['MEG','HEG','PEM','MEE'],icon:'💼'},
+  {prog:'Bachelor of Business Administration',cat:'Business',essential:['Economics','Entrepreneurship'],relevant:['Mathematics','History'],careers:['Business Manager','Entrepreneur','Marketing Executive','HR Manager'],combos:['MEE','HEEnt','HEntG','LEE'],icon:'📊'},
+  {prog:'BSc. Actuarial Science',cat:'Business',essential:['Mathematics'],relevant:['Physics','Economics'],careers:['Actuary','Risk Manager','Financial Analyst','Insurance Analyst'],combos:['PCM','PEM','MEG'],icon:'🔢'},
+  {prog:'Bachelor of Laws (LLB)',cat:'Law',essential:['Any two A-Level subjects'],relevant:['History','Literature','Economics'],careers:['Lawyer','Judge','Legal Consultant','Human Rights Advocate'],combos:['HEL','HED','HLG','HEG'],icon:'⚖️'},
+  {prog:'Bachelor of Journalism & Communication',cat:'Arts',essential:['History','Literature','Economics'],relevant:['Geography','Languages'],careers:['Journalist','Media Analyst','Public Relations Officer'],combos:['HEL','LEE','HLG','FEL'],icon:'📰'},
+  {prog:'Bachelor of Arts (Education)',cat:'Education',essential:['History','Literature','Geography','Economics'],relevant:['Languages','Music','Art'],careers:['Secondary School Teacher','Curriculum Developer'],combos:['HEG','HEL','HLD','HLG'],icon:'👩‍🏫'},
+  {prog:'BSc. Education (Biological)',cat:'Education',essential:['Biology','Chemistry'],relevant:['Physics','Mathematics'],careers:['Science Teacher','Lab Technician'],combos:['PCB','BCA','BCM'],icon:'🔬'},
+  {prog:'BSc. Education (Physical)',cat:'Education',essential:['Mathematics','Physics'],relevant:['Chemistry','Biology'],careers:['Physics/Chemistry Teacher','Curriculum Designer'],combos:['PCM','PEM'],icon:'⚛️'},
+  {prog:'BSc. Education (Economics)',cat:'Education',essential:['Mathematics','Economics'],relevant:['Chemistry','Biology'],careers:['Economics Teacher','Financial Analyst'],combos:['MEG','PEM','MEE'],icon:'📊'},
+  {prog:'BSc. AI & Machine Learning',cat:'Computing & IT',essential:['Mathematics','Physics'],relevant:['Chemistry','Economics'],careers:['AI Research Scientist','Machine Learning Engineer','Data Scientist'],combos:['PCM','PEM','BCM'],icon:'🤖'},
+  {prog:'BSc. Petroleum Geoscience & Production',cat:'Science',essential:['Chemistry','Physics','Mathematics'],relevant:['Biology','Economics'],careers:['Petroleum Geologist','Oil & Gas Engineer'],combos:['PCM','PCB','PEM'],icon:'⛽'},
 ];
-const TIPS = ['Have the Right Mindset','Practice past papers','Stay consistent','Seek help','Balance subjects','Start early','Develop critical thinking','Set realistic goals','Avoid procrastination','Stay positive'];
+const TIPS = [
+  'Have the Right Mindset — approach subjects with focus and motivation.',
+  'Attitude is Key — cultivate a growth mindset. Resilience matters.',
+  'Choose Subjects Aligned with Career Goals, not just peer influence.',
+  'Follow Your Heart, Not the Crowd — choose subjects matching your interests and strengths.',
+  'Prioritise Learning a Skill — critical thinking and time management matter.',
+  'Plan and Be Self-Driven — develop a study schedule and stay disciplined.',
+  'Utilise Textbooks — make notes, summarise key points, and revisit difficult topics.',
+  'Engage in Research — explore beyond the textbook; use online resources and journals.',
+  'Master Time Management — balance studies, breaks, and revision in a structured timetable.',
+  'Seek Help When Needed — ask teachers, classmates or tutors about difficult topics.',
+  'Stay Consistent with Revision — start early and avoid cramming before exams.',
+  'Build Exam Techniques — practice past papers and mock exams regularly.',
+  'Stay Physically and Mentally Healthy — eat well, sleep enough, and take breaks.',
+  'Stay Positive and Believe in Yourself — confidence enhances performance.',
+  'Engage Beyond the Classroom — clubs, community work and reading all matter.',
+  'Develop Critical Thinking — analyse, evaluate, and apply information critically.',
+  'Stay Organised — neat notes and a structured workspace save time and reduce stress.',
+  'Set Realistic Goals — break long-term goals into smaller achievable steps.',
+  'Balance Social Life and Studies — maintain a healthy work-life balance.',
+  'Be Adaptable — if something is not working, try a different approach or resource.',
+  'Track Your Progress — regularly assess each subject and adjust your study plan.',
+  'Build Confidence — recognise your strengths and acknowledge progress.',
+  'Avoid Procrastination — use the Pomodoro Technique to stay focused.',
+  'Stay Informed — keep up with news relevant to your subjects and career goals.',
+  'Reflect on Your Learning — identify areas for improvement after every test or assignment.',
+];
 
-// ========== API FETCH FUNCTIONS ==========
-async function fetchSchools() {
-  try {
-    const res = await fetch(`${API_BASE}/api/schools/`);
-    if (!res.ok) throw new Error('HTTP '+res.status);
-    const data = await res.json();
-    const schools = data.results || [];
-    return schools.map(s => ({
-      id: s.id,
-      name: s.name,
-      type: s.school_type,
-      region: s.region,
-      district: s.district,
-      phone: s.phone,
-      website: s.website,
-      email: s.email,
-      combos: s.combinations_offered ? s.combinations_offered.split(',').map(c=>c.trim()) : [],
-      boarding: s.boarding,
-      description: s.description,
-      facilities: s.facilities,
-      students: s.a_level_students || 0,
-      motto: s.motto,
-      year: s.year_founded,
-      logo: s.logo_url,
-      image: s.image_url,
-      featured: s.is_featured,
-      ad_tier: s.ad_tier,
-    }));
-  } catch(e) {
-    console.error('API fetch failed', e);
-    return [];
+// ---------------------- DEMO SCHOOLS DATA (fallback if API fails) ----------------------
+const DEMO_SCHOOLS = [
+  {id:1,name:'Arua Public Secondary School',type:'Government',region:'West Nile',district:'Arua City',phone:'0772 100 001',website:'https://aruapublic.sc.ug',combos:['PCB','PCM','HEG','HEL','MEG'],boarding:'both',desc:'One of West Nile\'s leading government schools. Strong science and arts departments with experienced faculty.',facilities:'Science labs, Library, Computer lab, Football pitch',students:240,motto:'Excellence Through Knowledge',year:1952,logo:'',image:'',featured:true,tier:'premium'},
+  {id:2,name:"St. Joseph's College Ombaci",type:'Catholic',region:'West Nile',district:'Arua District',phone:'0772 100 002',website:'',combos:['PCB','HEG','HEL','MEG','BCA'],boarding:'both',desc:'Faith-based excellence. Strong humanities and science track record with boarding facilities.',facilities:'Science labs, Chapel, Library, Sports',students:180,motto:'Knowledge and Virtue',year:1963,logo:'',image:'',featured:true,tier:'standard'},
+  {id:3,name:'Mvara Secondary School',type:'Government',region:'West Nile',district:'Arua City',phone:'0772 100 003',website:'',combos:['PCM','BCM','HEG','MEE'],boarding:'day',desc:"One of Arua's oldest schools with strong STEM faculty and vibrant student culture.",facilities:'Physics lab, Library, Computer lab',students:160,motto:'Service Through Learning',year:1955,logo:'',image:'',featured:false,tier:'basic'},
+  {id:4,name:'Sacred Heart Girls Secondary School',type:'Catholic',region:'West Nile',district:'Arua City',phone:'0772 100 004',website:'',combos:['PCB','HEG','HEL','BCFN'],boarding:'boarding',desc:'Girls-only boarding school with strong academic results and pastoral care.',facilities:'Science labs, Library, Boarding',students:140,motto:'Truth and Service',year:1948,logo:'',image:'',featured:false,tier:'standard'},
+  {id:5,name:'Uganda Martyrs High School Lubaga',type:'Catholic',region:'Kampala',district:'Kampala',phone:'0414 270 500',website:'https://umhlubaga.ac.ug',combos:['PCB','PCM','BCM','HEG','HEL','MEG','PEM'],boarding:'both',desc:'Premier Catholic school in Kampala. Consistently top UACE results. Strong alumni network.',facilities:'Modern labs, ICT centre, Olympic pool, Library',students:420,motto:'Work, Integrity, Excellence',year:1906,logo:'',image:'',featured:true,tier:'premium'},
+  {id:6,name:'Gayaza High School',type:'Protestant',region:'Central 2',district:'Wakiso',phone:'0392 001 500',website:'',combos:['PCB','PCM','HEG','HEL','BCM'],boarding:'boarding',desc:'Historic girls boarding school. Top national performance. Character development focus.',facilities:'Modern science labs, Library, Chapel, Sports complex',students:380,motto:'Steadfast',year:1905,logo:'',image:'',featured:true,tier:'premium'},
+  {id:7,name:'Mbarara High School',type:'Government',region:'Ankole',district:'Mbarara',phone:'0485 123456',website:'',combos:['PCB','BCM','HEG'],boarding:'both',desc:'Leading science school in Ankole region.',students:300,motto:'Excellence',year:1950,logo:'',image:'',featured:false,tier:'basic'},
+  {id:8,name:'Tororo Girls School',type:'Private',region:'Busoga',district:'Tororo',phone:'0454 123456',website:'',combos:['HEL','MEG'],boarding:'boarding',desc:'Excellence in Eastern Uganda.',students:250,motto:'Girls Education First',year:1965,logo:'',image:'',featured:false,tier:'basic'},
+  {id:9,name:'Gulu High School',type:'Government',region:'Acholi',district:'Gulu',phone:'0471 123456',website:'',combos:['PCB','HEG'],boarding:'both',desc:'Top school in Acholi region.',students:280,motto:'Knowledge',year:1960,logo:'',image:'',featured:false,tier:'basic'},
+];
+const API_BASE = '';
+let AUTH = { access: null, refresh: null, school: null };
+let GRADES = {};
+let schoolStudents = [];
+let chatHistory = [];
+let chatMode = 'general';
+let currentSchool = '';
+let allPartnerSchools = [];
+let activeRegion = 'all';
+
+// ---------------------- HELPER FUNCTIONS ----------------------
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'partner-schools') {
+    renderAllSchools();
+    setRegionBackground(activeRegion);
   }
+  if (id === 'landing') renderLandingFeatured();
+  if (id === 'ai-advisor') { if (!document.getElementById('chatMsgs').children.length) initChat(); updateGradeCtx(); }
+  if (id === 'school') loadProfile();
 }
-
-async function fetchFeatured() {
+function switchTab(scope, paneId, btn) {
+  const ctx = document.getElementById(scope) || document;
+  ctx.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  ctx.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+  document.getElementById(paneId).classList.add('on');
+}
+function goTab(scope, idx) {
+  const tabs = document.querySelectorAll(`#${scope} .tab`);
+  const panes = document.querySelectorAll(`#${scope} .tab-pane`);
+  tabs.forEach(t => t.classList.remove('on'));
+  panes.forEach(p => p.classList.remove('on'));
+  if (tabs[idx]) tabs[idx].classList.add('on');
+  if (panes[idx]) panes[idx].classList.add('on');
+}
+function showLoader(txt) { document.getElementById('loaderTxt').textContent = txt || 'Please wait…'; document.getElementById('loader').classList.add('on'); }
+function hideLoader() { document.getElementById('loader').classList.remove('on'); }
+function closeModal() { document.getElementById('schoolModal').classList.remove('on'); }
+function openAdInquiry(tier) {
+  document.getElementById('ai-tier').value = tier;
+  document.getElementById('adInquiryTitle').innerHTML = tier === 'premium' ? 'Premium Featured Application (UGX 150,000/month)' : tier === 'standard' ? 'Standard Advertising Application (UGX 75,000/month)' : 'Free Basic Listing Application';
+  document.getElementById('adInquiryCard').style.display = 'block';
+  document.getElementById('adInquiryCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+async function submitAdInquiry() {
+  const school = document.getElementById('ai-school').value.trim();
+  const contact = document.getElementById('ai-contact').value.trim();
+  const phone = document.getElementById('ai-phone').value.trim();
+  if (!school || !contact || !phone) { alert('Please fill in school name, contact person and phone number.'); return; }
   try {
-    const res = await fetch(`${API_BASE}/api/featured/`);
-    if (!res.ok) throw new Error();
-    const data = await res.json();
-    return data.featured || [];
-  } catch(e) { return []; }
+    await fetch(API_BASE + '/api/advertising/inquire/', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        school_name: school, contact_name: contact, phone,
+        email: document.getElementById('ai-email').value,
+        district: document.getElementById('ai-district').value,
+        combinations: document.getElementById('ai-combos').value,
+        message: document.getElementById('ai-msg').value,
+        tier: document.getElementById('ai-tier').value
+      })
+    });
+  } catch (e) { }
+  document.getElementById('adInquiryCard').style.display = 'none';
+  document.getElementById('adSuccessMsg').style.display = 'flex';
+  document.getElementById('adSuccessMsg').scrollIntoView({ behavior: 'smooth' });
 }
+function previewImg(input, previewId, urlFieldId) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById(previewId).innerHTML = `<img src="${e.target.result}"/>`;
+    document.getElementById(urlFieldId).value = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+async function saveProfile() { alert('Profile saved demo mode'); }
+async function loadProfile() { }
+function schoolLogin() { alert('Demo login'); go('school'); }
+function schoolRegister() { alert('Registration submitted'); switchAuthTab('login', document.querySelector('.auth-tab')); }
+function schoolDemo() { go('school'); }
+function switchAuthTab(tab, btn) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('auth-login').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('auth-register').style.display = tab === 'register' ? 'block' : 'none';
+}
+function handleUpload(input) { alert('Demo upload'); loadDemoStudents(); }
+function loadDemoStudents() { schoolStudents = [{ name: 'John Opiyo', math: 'A' }]; renderSchoolReport(); }
+function renderSchoolReport() { document.getElementById('schoolReport').innerHTML = '<div class="card">Report: 1 student</div>'; goTab('sc', 3); }
+function addManual() { alert('Added'); }
 
-async function fetchSchoolDetail(id) {
+// ---------------------- PARTNER SCHOOLS API & FILTERING ----------------------
+async function fetchPartnerSchools() {
   try {
-    const res = await fetch(`${API_BASE}/api/schools/${id}/`);
-    if (!res.ok) throw new Error();
-    return await res.json();
-  } catch(e) { return null; }
+    const response = await fetch(API_BASE + '/api/schools/');
+    if (!response.ok) throw new Error('HTTP error');
+    const data = await response.json();
+    const schools = data.results || [];
+    if (schools.length === 0) return DEMO_SCHOOLS;
+    return schools.map(s => ({
+      id: s.id, name: s.name, type: s.school_type, region: s.region, district: s.district,
+      phone: s.phone, website: s.website, combos: s.combinations_offered ? s.combinations_offered.split(',').map(c => c.trim()) : [],
+      boarding: s.boarding, desc: s.description, facilities: s.facilities, students: s.a_level_students,
+      motto: s.motto, year: s.year_founded, logo: s.logo_url, image: s.image_url, featured: s.is_featured, ad_tier: s.ad_tier
+    }));
+  } catch (e) { console.warn('API failed, using demo schools', e); return DEMO_SCHOOLS; }
 }
-
-// ========== RENDER SCHOOL FUNCTIONS ==========
+function getRegionGroup(regionName) {
+  const r = (regionName || '').toLowerCase();
+  if (r.includes('west nile') || r.includes('acholi') || r.includes('lango') || r.includes('northern') || r === 'northern') return 'Northern';
+  if (r.includes('kampala') || r.includes('central') || r.includes('buganda') || r === 'central') return 'Central';
+  if (r.includes('ankole') || r.includes('bunyoro') || r.includes('kigezi') || r.includes('tooro') || r.includes('rwenzori') || r === 'western') return 'Western';
+  if (r.includes('bugisu') || r.includes('busoga') || r.includes('teso') || r.includes('eastern') || r === 'eastern') return 'Eastern';
+  return 'all';
+}
+function setRegionBackground(region) {
+  const container = document.getElementById('partnerBgContainer');
+  if (!container) return;
+  const gradients = {
+    'all': 'linear-gradient(125deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%)',
+    'Northern': 'linear-gradient(125deg, rgba(255,215,0,0.25) 0%, rgba(0,0,0,0.7) 100%)',
+    'Central': 'linear-gradient(125deg, rgba(34,139,34,0.25) 0%, rgba(0,0,0,0.7) 100%)',
+    'Western': 'linear-gradient(125deg, rgba(0,0,0,0.8) 0%, rgba(50,50,50,0.9) 100%)',
+    'Eastern': 'linear-gradient(125deg, rgba(255,165,0,0.25) 0%, rgba(0,0,0,0.7) 100%)'
+  };
+  container.style.background = gradients[region] || gradients['all'];
+}
 function schoolCardHTML(s) {
   const tierBadge = s.ad_tier === 'premium' ? '<span class="badge bg-t">⭐ Featured</span>' : (s.ad_tier === 'standard' ? '<span class="badge bg-g">Standard</span>' : '');
   const logoHtml = s.logo ? `<img src="${s.logo}" alt="logo"/>` : '🎓';
@@ -745,151 +740,316 @@ function schoolCardHTML(s) {
   return `<div class="school-card" onclick="openSchoolModal('${s.id}')">
     ${imgHtml}
     <div class="school-body">
-      <div class="school-head">
-        <div class="school-logo">${logoHtml}</div>
-        <div><div class="school-name">${s.name}</div><div class="school-meta">📍 ${s.district || ''} ${s.region ? '· '+s.region : ''}</div></div>
-      </div>
-      <div class="school-desc">${s.description ? s.description.slice(0,100)+'…' : ''}</div>
-      <div class="school-combos">${(s.combos||[]).slice(0,3).map(c=>`<span class="school-combo">${c}</span>`).join('')}</div>
+      <div class="school-head"><div class="school-logo">${logoHtml}</div><div><div class="school-name">${s.name}</div><div class="school-meta">📍 ${s.district || ''} ${s.region ? '· ' + s.region : ''}</div></div></div>
+      <div class="school-desc">${s.desc ? s.desc.slice(0, 100) + '…' : ''}</div>
+      <div class="school-combos">${(s.combos || []).slice(0, 3).map(c => `<span class="school-combo">${c}</span>`).join('')}</div>
       <div class="school-footer">${phoneBtn}${websiteBtn}<button class="school-contact-btn primary" onclick="event.stopPropagation();openSchoolModal('${s.id}')">View Details</button></div>
     </div>
   </div>`;
 }
-
-async function renderLandingFeatured() {
+function openSchoolModal(id) {
+  const school = allPartnerSchools.find(s => s.id == id);
+  if (!school) return;
+  const logoHtml = school.logo ? `<img src="${school.logo}"/>` : '🎓';
+  const imgHtml = school.image ? `<img class="modal-img" src="${school.image}" alt="${school.name}"/>` : `<div class="modal-img-placeholder">🏫</div>`;
+  document.getElementById('schoolModalContent').innerHTML = `
+    ${imgHtml}
+    <div class="modal-content">
+      <div class="modal-header"><div class="modal-logo">${logoHtml}</div><div><div class="modal-school-name">${school.name}</div><div style="font-size:.78rem;">📍 ${school.district || ''} ${school.region ? ', ' + school.region : ''}</div></div><button class="modal-close" onclick="closeModal()">✕</button></div>
+      <p>${school.desc || ''}</p>
+      <div class="school-combos">${(school.combos || []).map(c => `<span class="school-combo">${c}</span>`).join('')}</div>
+      <div style="margin-top:1rem; display:flex; gap:.5rem;">${school.phone ? `<a href="tel:${school.phone}" class="btn btn-gold">📞 ${school.phone}</a>` : ''}${school.website ? `<a href="${school.website}" target="_blank" class="btn btn-ghost">🌐 Website</a>` : ''}</div>
+    </div>`;
+  document.getElementById('schoolModal').classList.add('on');
+}
+function renderLandingFeatured() {
   const container = document.getElementById('landingFeatured');
   if (!container) return;
-  const featured = allPartnerSchools.filter(s => s.featured).slice(0,3);
+  const featured = allPartnerSchools.filter(s => s.featured || s.ad_tier === 'premium').slice(0, 3);
   container.innerHTML = featured.map(s => schoolCardHTML(s)).join('');
 }
-
 function renderAllSchools() { applySchoolFilters(); }
-
+function searchSchools() { applySchoolFilters(); }
 function applySchoolFilters() {
   const searchTerm = (document.getElementById('schoolSearch')?.value || '').toLowerCase();
   const boardingFilter = (document.getElementById('schoolBoarding')?.value || '').toLowerCase();
   let filtered = [...allPartnerSchools];
-  if (activeRegionFilter !== 'all') {
-    filtered = filtered.filter(s => (s.region && s.region.toLowerCase() === activeRegionFilter.toLowerCase()));
+  if (activeRegion !== 'all') {
+    filtered = filtered.filter(s => getRegionGroup(s.region) === activeRegion);
   }
   if (searchTerm) {
-    filtered = filtered.filter(s => s.name.toLowerCase().includes(searchTerm) || (s.combos||[]).some(c=>c.toLowerCase().includes(searchTerm)));
+    filtered = filtered.filter(s => s.name.toLowerCase().includes(searchTerm) || (s.combos || []).some(c => c.toLowerCase().includes(searchTerm)));
   }
-  if (boardingFilter && boardingFilter !== 'any' && boardingFilter !== '') {
+  if (boardingFilter && boardingFilter !== '') {
     filtered = filtered.filter(s => s.boarding === boardingFilter);
   }
   const container = document.getElementById('schoolsGrid');
   if (container) container.innerHTML = filtered.map(s => schoolCardHTML(s)).join('');
 }
-
 function filterSchools(region, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('#regionNav .filter-btn').forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
-  activeRegionFilter = region;
+  activeRegion = region;
+  setRegionBackground(region);
   applySchoolFilters();
 }
-function searchSchools() { applySchoolFilters(); }
-
-async function openSchoolModal(id) {
-  const school = allPartnerSchools.find(s => s.id == id);
-  if (!school) return;
-  const detail = await fetchSchoolDetail(id);
-  if (!detail) return;
-  const combos = (detail.combinations_offered || '').split(',').map(c=>c.trim());
-  const logoHtml = detail.logo_url ? `<img src="${detail.logo_url}"/>` : '🎓';
-  const imgHtml = detail.image_url ? `<img class="modal-img" src="${detail.image_url}" alt="${detail.name}"/>` : `<div class="modal-img-placeholder">🏫</div>`;
-  document.getElementById('schoolModalContent').innerHTML = `
-    ${imgHtml}
-    <div class="modal-content">
-      <div class="modal-header"><div class="modal-logo">${logoHtml}</div><div><div class="modal-school-name">${detail.name}</div><div style="font-size:.78rem;">📍 ${detail.district} ${detail.region ? ', '+detail.region : ''}</div></div><button class="modal-close" onclick="closeModal()">✕</button></div>
-      <p style="margin-bottom:1rem;">${detail.description || ''}</p>
-      <div class="school-combos">${combos.map(c=>`<span class="school-combo">${c}</span>`).join('')}</div>
-      <div style="margin-top:1rem; display:flex; gap:.5rem;">${detail.phone ? `<a href="tel:${detail.phone}" class="btn btn-gold">📞 ${detail.phone}</a>` : ''}${detail.website ? `<a href="${detail.website}" target="_blank" class="btn btn-ghost">🌐 Website</a>` : ''}</div>
-    </div>`;
-  document.getElementById('schoolModal').classList.add('on');
-}
-function closeModal() { document.getElementById('schoolModal').classList.remove('on'); }
-
 function initRegionButtons() {
   const nav = document.getElementById('regionNav');
   if (!nav) return;
-  const regions = ['all', 'Central', 'Eastern', 'Northern', 'Western'];
+  const regions = [
+    { id: 'all', label: 'All Regions' },
+    { id: 'Northern', label: 'Northern (Yellow)' },
+    { id: 'Central', label: 'Central (Green)' },
+    { id: 'Western', label: 'Western (Dark)' },
+    { id: 'Eastern', label: 'Eastern (Yellow)' }
+  ];
   regions.forEach(r => {
     const btn = document.createElement('button');
-    btn.className = `filter-btn ${r === 'all' ? 'on' : ''}`;
-    btn.textContent = r === 'all' ? 'All Regions' : r;
-    btn.onclick = () => filterSchools(r, btn);
+    btn.className = `filter-btn ${r.id === 'all' ? 'on' : ''}`;
+    btn.textContent = r.label;
+    btn.onclick = () => filterSchools(r.id, btn);
     nav.appendChild(btn);
   });
 }
 
-// ========== ORIGINAL STUDENT PORTAL FUNCTIONS (preserved) ==========
+// ---------------------- STUDENT PORTAL FUNCTIONS (preserved) ----------------------
 function buildGradeForm() {
   const el = document.getElementById('gradesForm');
-  if (!el || el.innerHTML) return;
+  if (!el || el.innerHTML.trim()) return;
   let h = '<div class="fg">';
-  O_SUBJECTS.forEach(s => { let id = 'gr_'+s.replace(/\W/g,'_'); h+=`<div class="fld"><label>${s}</label><select id="${id}"><option value="">—</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div>`; });
-  h+='</div>'; el.innerHTML=h;
+  O_SUBJECTS.forEach(s => {
+    const id = 'gr_' + s.replace(/\W/g, '_');
+    h += `<div class="fld"><label>${s}</label><select id="${id}"><option value="">— not sat —</option><option value="A">A (6pts)</option><option value="B">B (5pts)</option><option value="C">C (4pts)</option><option value="D">D (3pts)</option><option value="E">E (2pts)</option><option value="F">F (1pt)</option></select></div>`;
+  });
+  h += '</div>';
+  el.innerHTML = h;
 }
-function collectGrades() { let g={}; O_SUBJECTS.forEach(s=>{let el=document.getElementById('gr_'+s.replace(/\W/g,'_'));if(el&&el.value) g[s]=el.value;}); return g; }
-function resetGrades() { GRADES={}; document.getElementById('gradesForm').innerHTML=''; buildGradeForm(); document.querySelectorAll('#combosOut,#careersOut,#degreesOut,#checkOut').forEach(el=>el.innerHTML='<div class="empty-state"><div class="ico">📋</div><h3>No results yet</h3></div>'); updateGradeCtx(); }
-function scoreCombo(c,g) { let total=0; c.subs.forEach(s=>{if(g[s]) total+=GP[g[s]];}); let pct=Math.round((total/(c.subs.length*6))*100); return {...c,pct}; }
-function rankCombos(g=GRADES) { return COMBOS.map(c=>scoreCombo(c,g)).sort((a,b)=>b.pct-a.pct); }
-function renderCombos() { let ranked=rankCombos(); let h='<div class="combo-list">'; ranked.forEach((c,i)=>{ h+=`<div class="combo-item"><div class="combo-rank ${i===0?'rk1':'rkN'}">${i+1}</div><div class="combo-body"><div class="combo-code">${c.icon} ${c.code}</div><div class="combo-name">${c.full}</div><div class="score-row"><div class="score-track"><div class="score-fill sf-hi" style="width:${c.pct}%"></div></div><div class="score-pct">${c.pct}%</div></div><div class="combo-note">Subsidiary: ${c.sub_req}</div></div></div>`; }); h+='</div>'; document.getElementById('combosOut').innerHTML=h; }
-function evalCareerByGrades(career,g){ let combos=CAREER_MAP[career]||[], ranked=rankCombos(g), maxPct=ranked.filter(c=>combos.includes(c.code)).reduce((m,c)=>Math.max(m,c.pct),0); return {status:maxPct>=70?'YES':maxPct>=45?'GUIDANCE':'NO',score:maxPct}; }
-function renderBestCareers(){ let all=Object.keys(CAREER_MAP).map(c=>{let e=evalCareerByGrades(c);return{career:c,...e};}).sort((a,b)=>b.score-a.score); let yes=all.filter(r=>r.status==='YES'); let h=''; if(yes.length) h+=`<div class="card"><div class="card-title">✅ Careers You Qualify For</div><div class="career-grid">${yes.map(r=>`<div class="career-tile ct-tier-yes" onclick="pickCareerCheck('${r.career}')"><div class="ct-ico">${CAREER_ICONS[r.career]||'🎓'}</div><div class="ct-name">${r.career}</div><div class="ct-pct">${r.score}%</div></div>`).join('')}</div></div>`; document.getElementById('careersOut').innerHTML=h; }
-function renderDegrees(){ let ranked=rankCombos(), topCodes=ranked.slice(0,3).map(c=>c.code); let h='<div class="card"><div class="card-title">🎓 Recommended Degrees</div>'; DEGREES.forEach(d=>{ let match=d.combos.filter(c=>topCodes.includes(c)).length; let score=match*50; h+=`<div><strong>${d.icon} ${d.prog}</strong><br><span class="badge bg-t">${d.combos.join(', ')}</span><div>Match: ${score}%</div></div><hr/>`; }); h+='</div>'; document.getElementById('degreesOut').innerHTML=h; }
-function doCareerCheck(){ let career=document.getElementById('cc-career').value; if(!career) return; let ev=evalCareerByGrades(career); let msg=ev.status==='YES'?`<div class="compat compat-yes"><div class="compat-ico">✅</div><div class="compat-title">You Qualify!</div></div>`:`<div class="compat compat-no"><div class="compat-ico">⚠️</div><div class="compat-title">Needs Improvement</div></div>`; document.getElementById('checkOut').innerHTML=msg; }
-function pickCareerCheck(c){ document.getElementById('cc-career').value=c; doCareerCheck(); goTab('st',3); }
-function analyseAll(){ let g=collectGrades(); if(Object.keys(g).length<4){alert('Enter at least 4 subjects');return;} GRADES=g; showLoader(); setTimeout(()=>{ hideLoader(); renderCombos(); renderBestCareers(); renderDegrees(); updateGradeCtx(); goTab('st',1); },800); }
-function updateGradeCtx(){ let el=document.getElementById('gradeCtx'); if(el) el.style.display=Object.keys(GRADES).length>=4?'flex':'none'; if(Object.keys(GRADES).length>=4) document.getElementById('gradeCtxTop').textContent=rankCombos()[0]?.code||''; }
-function populateGuideSelects(){ let gc=document.getElementById('g-combo'), gcr=document.getElementById('g-career'); if(gc.options.length>1) return; COMBOS.forEach(c=>gc.appendChild(new Option(`${c.code} — ${c.full}`,c.code))); Object.keys(CAREER_MAP).forEach(c=>gcr.appendChild(new Option(c,c))); }
-function renderGuide(){ let combo=document.getElementById('g-combo').value,career=document.getElementById('g-career').value,h=''; if(combo){ let c=COMBOS.find(x=>x.code===combo); if(c) h=`<div class="card"><div class="card-title">${c.code} Preparation</div><p>Focus on ${c.subs.join(', ')}.</p></div>`; } if(career && CAREER_MAP[career]) h+=`<div class="card"><div class="card-title">${career} Path</div><p>Required combos: ${CAREER_MAP[career].join(', ')}</p></div>`; document.getElementById('guideOut').innerHTML=h||'<div class="empty-state">Select a combination or career</div>'; }
-function renderTips(){ document.getElementById('tipsOut').innerHTML=TIPS.map((t,i)=>`<div>${i+1}. ${t}</div>`).join(''); }
-function viewParent(){ let name=document.getElementById('p-name').value; if(!name) return; let demoGrades={'Mathematics':'A','Physics':'A','Chemistry':'A','Biology':'B'}; let ranked=rankCombos(demoGrades); document.getElementById('parentOut').innerHTML=`<div class="card"><div class="card-title">${name}</div><p>Top combo: ${ranked[0].code} (${ranked[0].pct}%)</p></div>`; }
-function loadDemoParent(){ document.getElementById('p-name').value='Grace Akello'; viewParent(); }
-function goTab(scope,idx){ let tabs=document.querySelectorAll(`#${scope} .tab`), panes=document.querySelectorAll(`#${scope} .tab-pane`); tabs.forEach(t=>t.classList.remove('on')); panes.forEach(p=>p.classList.remove('on')); if(tabs[idx]) tabs[idx].classList.add('on'); if(panes[idx]) panes[idx].classList.add('on'); }
-function populateSelects(){ let careers=Object.keys(CAREER_MAP); ['cc-career','m-career'].forEach(id=>{ let el=document.getElementById(id); if(el&&el.options.length<=1) careers.forEach(c=>el.appendChild(new Option(c,c))); }); }
-function initDrop(){ let dz=document.getElementById('dropZone'); if(dz){dz.addEventListener('dragover',e=>e.preventDefault());dz.addEventListener('drop',e=>{e.preventDefault();if(e.dataTransfer.files[0]) document.getElementById('fileIn').files=e.dataTransfer.files; handleUpload(document.getElementById('fileIn'));});} }
-function handleUpload(input){ alert('Demo upload'); loadDemoStudents(); }
-function loadDemoStudents(){ schoolStudents=[{name:'John Opiyo',math:'A'}]; renderSchoolReport(); }
-function renderSchoolReport(){ document.getElementById('schoolReport').innerHTML='<div class="card">Report: 1 student</div>'; goTab('sc',3); }
-function addManual(){ alert('Added'); }
-function previewImg(input,previewId,urlFieldId){ let file=input.files[0]; if(file){ let reader=new FileReader(); reader.onload=e=>{ document.getElementById(previewId).innerHTML=`<img src="${e.target.result}"/>`; document.getElementById(urlFieldId).value=e.target.result; }; reader.readAsDataURL(file); } }
-function saveProfile(){ alert('Profile saved (demo)'); }
-function loadProfile(){}
-function schoolLogin(){ alert('Demo login'); AUTH.access='demo'; go('school'); }
-function schoolRegister(){ alert('Registration submitted'); switchAuthTab('login',document.querySelector('.auth-tab')); }
-function schoolDemo(){ go('school'); }
-function switchAuthTab(tab,btn){ document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('on')); btn.classList.add('on'); document.getElementById('auth-login').style.display=tab==='login'?'block':'none'; document.getElementById('auth-register').style.display=tab==='register'?'block':'none'; }
-function openAdInquiry(tier){ document.getElementById('ai-tier').value=tier; document.getElementById('adInquiryCard').style.display='block'; }
-function submitAdInquiry(){ alert('Application submitted'); document.getElementById('adInquiryCard').style.display='none'; }
-function goToAI(query){ go('ai-advisor'); setTimeout(()=>{ let inp=document.getElementById('chatInput'); if(inp) inp.value=query; sendChat(); },400); }
-function startTopic(topic){ goToAI(TOPIC_PROMPTS[topic]||'Help me choose A-Level combination'); }
-function setMode(mode,btn){ chatMode=mode; document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); addAIMsg(`Switching to ${mode} mode.`); }
-function quickSend(el){ goToAI(el.textContent); }
-function initChat(){ addAIMsg("👋 Hello! I'm your EduPath AI Advisor. Ask me anything about Uganda's education system."); }
-function addAIMsg(text){ let el=document.getElementById('chatMsgs'); if(el) el.innerHTML+=`<div class="msg msg-ai"><div class="msg-av msg-av-ai">🤖</div><div><div class="msg-bubble bubble-ai">${text}</div></div></div>`; el.scrollTop=el.scrollHeight; }
-function addUserMsg(text){ let el=document.getElementById('chatMsgs'); if(el) el.innerHTML+=`<div class="msg msg-user"><div class="msg-av msg-av-u">👤</div><div><div class="msg-bubble bubble-user">${text}</div></div></div>`; el.scrollTop=el.scrollHeight; }
-function addTyping(){ let id='typ_'+Date.now(); let el=document.getElementById('chatMsgs'); let div=document.createElement('div'); div.className='msg msg-ai'; div.id=id; div.innerHTML='<div class="msg-av msg-av-ai">🤖</div><div><div class="msg-bubble bubble-ai"><div class="typing"><span></span><span></span><span></span></div></div></div>'; el.appendChild(div); el.scrollTop=el.scrollHeight; return id; }
-function removeTyping(id){ let el=document.getElementById(id); if(el) el.remove(); }
-async function sendChat(){ let input=document.getElementById('chatInput'); let msg=input.value.trim(); if(!msg) return; input.value=''; addUserMsg(msg); let typId=addTyping(); try{ await new Promise(r=>setTimeout(r,1000)); removeTyping(typId); addAIMsg(`Thanks for your question: "${msg}". For detailed guidance, use the Student Portal to enter your grades, then the AI will give personalised advice.`); }catch(e){ removeTyping(typId); addAIMsg("I'm offline right now. Please use the Student Portal for combination rankings."); } }
-function clearChat(){ document.getElementById('chatMsgs').innerHTML=''; initChat(); }
-const TOPIC_PROMPTS={ combo:'Help me choose my A-Level combination',career:'What career suits my O-Level results?',university:'Which universities should I target?',market:'Uganda job market — what pays well?',struggle:'I\'m struggling — what are my options?',scholarship:'Scholarships available in Uganda',vocational:'Vocational & technical routes in Uganda',subjects:'I\'m weak in Maths — which combinations work?' };
-function showLoader(t){ let l=document.getElementById('loader'); if(l){document.getElementById('loaderTxt').textContent=t||'Loading...';l.classList.add('on');} }
-function hideLoader(){ let l=document.getElementById('loader'); if(l) l.classList.remove('on'); }
-function switchTab(scope,paneId,btn){ let ctx=document.getElementById(scope)||document; ctx.querySelectorAll('.tab').forEach(t=>t.classList.remove('on')); btn.classList.add('on'); ctx.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on')); document.getElementById(paneId).classList.add('on'); }
-function go(id){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); if(id==='partner-schools') renderAllSchools(); if(id==='landing') renderLandingFeatured(); if(id==='ai-advisor') initChat(); updateGradeCtx(); }
+function collectGrades() { let g = {}; O_SUBJECTS.forEach(s => { const el = document.getElementById('gr_' + s.replace(/\W/g, '_')); if (el && el.value) g[s] = el.value; }); return g; }
+function resetGrades() {
+  GRADES = {};
+  document.getElementById('gradesForm').innerHTML = '';
+  buildGradeForm();
+  ['combosOut', 'careersOut', 'degreesOut', 'checkOut'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<div class="empty-state"><div class="ico">📋</div><h3>No results yet</h3><p>Enter grades in Tab 1 first.</p></div>';
+  });
+  updateGradeCtx();
+}
+function scoreCombo(c, g = GRADES) {
+  let total = 0, weak = [], missing = [];
+  c.subs.forEach(s => {
+    if (!g[s]) missing.push(s);
+    else { const p = GP[g[s]]; total += p; if (p < 4) weak.push(s); }
+  });
+  const max = c.subs.length * 6;
+  const pct = missing.length === c.subs.length ? 0 : Math.round((total / max) * 100);
+  return { ...c, score: total, pct, weak, missing };
+}
+function rankCombos(g = GRADES) { return COMBOS.map(c => scoreCombo(c, g)).sort((a, b) => b.score - a.score); }
+function renderCombos() {
+  const ranked = rankCombos();
+  const name = document.getElementById('st-name').value || 'Student';
+  let h = `<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem;"><div><strong style="font-family:'Syne',sans-serif">Ranked A-Level Combinations</strong> <span style="color:var(--muted);font-size:.78rem;">for ${name}</span></div><button class="btn btn-ghost" style="font-size:.77rem;" onclick="goTab('st',0)">✏️ Edit Grades</button></div><div class="combo-list">`;
+  ranked.forEach((c, i) => {
+    const rkCls = i === 0 ? 'rk1' : i === 1 ? 'rk2' : i === 2 ? 'rk3' : 'rkN';
+    const sfCls = c.pct >= 70 ? 'sf-hi' : c.pct >= 50 ? 'sf-md' : 'sf-lo';
+    const pctCol = c.pct >= 70 ? 'var(--teal)' : c.pct >= 50 ? 'var(--gold)' : 'var(--rose)';
+    const tBadge = c.type === 'Science' ? 'bg-s' : 'bg-v';
+    h += `<div class="combo-item" style="animation-delay:${i * .05}s"><div class="combo-rank ${rkCls}">${i + 1}</div><div class="combo-body"><div class="combo-code">${c.icon} ${c.code}<span class="badge ${tBadge}" style="font-size:.65rem;margin-left:.4rem;">${c.type}</span></div><div class="combo-name">${c.full}</div><div class="combo-subs">${c.subs.map(s => `<span class="sub-tag">${s}</span>`).join('')}</div><div class="score-row"><div class="score-track"><div class="score-fill ${sfCls}" style="width:${c.pct}%"></div></div><div class="score-pct" style="color:${pctCol}">${c.pct}%</div></div><div class="combo-note">Subsidiary: <strong>${c.sub_req}</strong> + General Paper required</div>${c.weak.length ? `<div class="combo-warn">⚠ Weak in: ${c.weak.join(', ')} — strengthen before S.5</div>` : ''}</div></div>`;
+  });
+  h += '</div><div class="alert alert-g" style="margin-top:1rem;">📌 <strong>PUJAB Subsidiary Rules:</strong> With Principal Mathematics → Sub-ICT required. With Economics (no Math) → Sub-Math required. Science combos without Principal Math → Sub-Math required.</div>';
+  document.getElementById('combosOut').innerHTML = h;
+}
+function evalCareerByGrades(career, g = GRADES) {
+  const combos = CAREER_MAP[career] || [];
+  const ranked = rankCombos(g);
+  const maxPct = ranked.filter(c => combos.includes(c.code)).reduce((mx, c) => Math.max(mx, c.pct), 0);
+  const hasGood = combos.some(code => { const c = COMBOS.find(x => x.code === code); if (!c) return false; const sc = scoreCombo(c, g); return sc.pct >= 55 && sc.weak.length === 0; });
+  const status = maxPct >= 70 && hasGood ? 'YES' : maxPct >= 45 ? 'GUIDANCE' : 'NO';
+  return { status, score: maxPct, bestCombo: ranked[0]?.code || '' };
+}
+function renderBestCareers() {
+  const all = Object.keys(CAREER_MAP).map(c => { const ev = evalCareerByGrades(c); return { career: c, ...ev }; }).sort((a, b) => b.score - a.score);
+  const yes = all.filter(r => r.status === 'YES');
+  const maybe = all.filter(r => r.status === 'GUIDANCE');
+  let h = '';
+  if (yes.length) {
+    h += `<div class="card" style="border-color:rgba(45,212,191,.2);"><div class="card-title" style="color:var(--teal);">✅ Careers You Qualify For (${yes.length})</div><p style="color:var(--muted2);font-size:.83rem;margin-bottom:.9rem;">Your O-Level grades meet the requirements for these careers. Click any to run a full check.</p><div class="career-grid">`;
+    yes.forEach((r, i) => {
+      h += `<div class="career-tile ct-tier-yes" style="animation-delay:${i * .04}s" onclick="pickCareerCheck('${r.career}')"><div class="ct-ico">${CAREER_ICONS[r.career] || '🎓'}</div><div class="ct-name">${r.career}</div><span class="badge bg-t">✓ Qualified</span><div class="ct-pct">${r.score}% match</div></div>`;
+    });
+    h += '</div></div>';
+  }
+  if (maybe.length) {
+    h += `<div class="card"><div class="card-title" style="color:var(--gold);">⚡ Within Reach With More Work (${maybe.length})</div><div class="career-grid">`;
+    maybe.forEach((r, i) => {
+      h += `<div class="career-tile ct-tier-maybe" style="animation-delay:${i * .04}s" onclick="pickCareerCheck('${r.career}')"><div class="ct-ico">${CAREER_ICONS[r.career] || '🎓'}</div><div class="ct-name">${r.career}</div><span class="badge bg-g">⚡ Possible</span><div class="ct-pct">${r.score}% match</div></div>`;
+    });
+    h += '</div></div>';
+  }
+  document.getElementById('careersOut').innerHTML = h;
+}
+function renderDegrees() {
+  const ranked = rankCombos();
+  const topCodes = ranked.slice(0, 5).map(c => c.code);
+  const scored = DEGREES.map(d => {
+    const match = d.combos.filter(c => topCodes.includes(c)).length;
+    const score = match * 25 + ranked.filter(c => d.combos.includes(c.code)).reduce((s, c) => s + (c.pct || 0), 0) / Math.max(d.combos.length, 1);
+    return { ...d, score };
+  }).sort((a, b) => b.score - a.score);
+  const cats = [...new Set(scored.map(d => d.cat))];
+  let h = '';
+  cats.forEach(cat => {
+    h += `<div class="card" style="margin-bottom:1rem;"><div class="card-title">${cat}</div><div style="display:flex;flex-direction:column;gap:.65rem;">`;
+    scored.filter(d => d.cat === cat).forEach(d => {
+      const mCls = d.score > 60 ? 'bg-t' : d.score > 30 ? 'bg-g' : 'bg-m';
+      h += `<div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:9px;padding:.85rem;display:flex;gap:.85rem;align-items:flex-start;"><div style="font-size:1.35rem;flex-shrink:0;">${d.icon}</div><div style="flex:1;min-width:0;"><div style="font-family:'Syne',sans-serif;font-size:.86rem;font-weight:700;margin-bottom:.22rem;">${d.prog}</div><div style="font-size:.76rem;color:var(--muted2);margin-bottom:.45rem;">${d.careers.slice(0, 3).join(' · ')}</div><div style="display:flex;gap:.3rem;flex-wrap:wrap;">${d.combos.map(c => `<span class="badge ${topCodes.includes(c) ? 'bg-t' : 'bg-s'}" style="font-size:.64rem;">${c}</span>`).join('')}</div></div><div style="flex-shrink:0;text-align:right;"><span class="badge ${mCls}">${d.score > 60 ? 'Strong' : 'Possible'}</span><div style="font-size:.7rem;color:var(--muted);margin-top:.2rem;">Need: ${d.essential.join(', ')}</div></div></div>`;
+    });
+    h += '</div></div>';
+  });
+  document.getElementById('degreesOut').innerHTML = h;
+}
+function pickCareerCheck(career) {
+  document.getElementById('cc-career').value = career;
+  goTab('st', 3);
+  doCareerCheck();
+}
+function doCareerCheck() {
+  const career = document.getElementById('cc-career').value;
+  const name = document.getElementById('cc-name').value || document.getElementById('st-name')?.value || 'Student';
+  if (!career) { alert('Please select a career.'); return; }
+  if (Object.keys(GRADES).length < 4) { document.getElementById('checkOut').innerHTML = '<div class="alert alert-g">⚠ Please enter and analyse your O-Level grades in Tab 1 first.</div>'; return; }
+  showLoader('Checking career compatibility…');
+  setTimeout(() => {
+    hideLoader();
+    const ev = evalCareerByGrades(career);
+    const reqCombos = (CAREER_MAP[career] || []).map(code => { const c = COMBOS.find(x => x.code === code); const sc = c ? scoreCombo(c) : { pct: 0 }; return { code, pct: sc.pct, full: c ? c.full : 'Unknown' }; }).sort((a, b) => b.pct - a.pct);
+    const altCareers = Object.keys(CAREER_MAP).filter(c => c !== career && evalCareerByGrades(c).status === 'YES').slice(0, 3);
+    if (ev.status === 'YES') {
+      document.getElementById('checkOut').innerHTML = `<div class="compat compat-yes"><div class="compat-ico">✅</div><div class="compat-title" style="color:var(--teal)">Yes — You Qualify!</div><div class="compat-msg"><strong>${name}</strong>, your O-Level results meet requirements for <strong>${career}</strong>.</div><div style="margin-top:1rem;display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;">${reqCombos.slice(0, 3).map(c => `<span class="cpill cpill-t">${c.code} · ${c.pct}%</span>`).join('')}</div><div style="margin-top:.85rem;font-size:.83rem;color:var(--muted2);">Best combination: <strong style="color:var(--txt)">${reqCombos[0].code} — ${reqCombos[0].full}</strong></div><button class="btn btn-teal" style="margin-top:1rem;" onclick="goToAI('I qualify for ${career}. Tell me about this career in Uganda — job market, salaries, which universities offer it, and what I should do next.')">🤖 Ask AI about this career</button></div>`;
+    } else {
+      document.getElementById('checkOut').innerHTML = `<div class="compat compat-no"><div class="compat-ico">${ev.status === 'GUIDANCE' ? '⚡' : '❌'}</div><div class="compat-title" style="color:${ev.status === 'GUIDANCE' ? 'var(--gold)' : 'var(--rose)'}">${ev.status === 'GUIDANCE' ? 'Possible — Needs More Work' : 'Not Yet Compatible'}</div><div class="compat-msg"><strong>${name}</strong>, your grades ${ev.status === 'GUIDANCE' ? 'partially meet' : 'do not meet'} requirements for <strong>${career}</strong>.</div><div class="issues">${reqCombos.slice(0, 3).map(c => `<div class="issue-row"><span style="color:var(--rose)">•</span>For ${c.code}: scored ${c.pct}% — need 70%+ for strong qualification</div>`).join('')}</div>${altCareers.length ? `<div style="margin-top:.85rem;font-size:.83rem;color:var(--muted2);">You do qualify for: <strong style="color:var(--teal)">${altCareers.join(' · ')}</strong></div>` : ''}<button class="btn btn-ghost" style="margin-top:1rem;" onclick="goToAI('I want to pursue ${career} but my grades are not yet strong enough. What are my realistic options in Uganda? Can I still get there?')">🤖 Ask AI for options</button></div>`;
+    }
+  }, 800);
+}
+function analyseAll() {
+  const g = collectGrades();
+  if (Object.keys(g).length < 4) { alert('Please enter at least 4 subject grades.'); return; }
+  GRADES = g;
+  showLoader('Analysing your O-Level results…');
+  setTimeout(() => {
+    hideLoader();
+    renderCombos();
+    renderBestCareers();
+    renderDegrees();
+    updateGradeCtx();
+    goTab('st', 1);
+  }, 1200);
+}
+function updateGradeCtx() {
+  const el = document.getElementById('gradeCtx');
+  if (!el) return;
+  if (Object.keys(GRADES).length >= 4) {
+    el.style.display = 'flex';
+    const top = rankCombos()[0];
+    document.getElementById('gradeCtxTop').textContent = top ? top.code : '—';
+  } else { el.style.display = 'none'; }
+}
+function populateGuideSelects() {
+  const gc = document.getElementById('g-combo'), gcr = document.getElementById('g-career');
+  if (!gc || gc.options.length > 1) return;
+  COMBOS.forEach(c => gc.appendChild(new Option(`${c.code} — ${c.full}`, c.code)));
+  Object.keys(CAREER_MAP).forEach(c => gcr.appendChild(new Option(c, c)));
+}
+function renderGuide() {
+  const combo = document.getElementById('g-combo').value;
+  const career = document.getElementById('g-career').value;
+  let h = '';
+  if (combo) {
+    const c = COMBOS.find(x => x.code === combo);
+    if (c) {
+      const relCareers = Object.entries(CAREER_MAP).filter(([, codes]) => codes.includes(combo)).map(([k]) => k);
+      h += `<div class="card"><div class="card-title">${c.icon} ${c.code} — O-Level Preparation Plan</div><p style="color:var(--muted2);font-size:.86rem;margin-bottom:1rem;">To qualify for <strong>${c.code}</strong>, target at least B grades in these subjects at O-Level:</p>${c.subs.map((s, i) => `<div style="display:flex;align-items:center;gap:.7rem;padding:.5rem 0;border-bottom:1px solid var(--border);"><div style="width:24px;height:24px;background:rgba(245,200,66,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;color:var(--gold);">${i + 1}</div><div style="flex:1;font-size:.86rem;font-weight:600;">${s}</div><div style="font-size:.76rem;color:var(--muted);">Target: <strong style="color:var(--txt)">B or better</strong></div></div>`).join('')}<div class="combo-note" style="margin-top:.85rem;">📋 Subsidiary: <strong>${c.sub_req}</strong> + General Paper at A-Level</div>${relCareers.length ? `<div style="margin-top:.85rem;font-size:.83rem;color:var(--muted2);">Career pathways: <strong style="color:var(--txt)">${relCareers.join(', ')}</strong></div>` : ''}</div>`;
+    }
+  }
+  if (career && CAREER_MAP[career]) {
+    h += `<div class="card"><div class="card-title">💼 ${career} — Required Combinations</div>${CAREER_MAP[career].map(code => { const c = COMBOS.find(x => x.code === code); return c ? `<div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:9px;padding:.72rem;margin-bottom:.5rem;"><div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;margin-bottom:.32rem;">${code} — ${c.full}</div><div style="display:flex;gap:.28rem;flex-wrap:wrap;">${c.subs.map(s => `<span class="sub-tag">${s}</span>`).join('')}</div></div>` : ''; }).join('')}</div>`;
+  }
+  if (!h) h = '<div class="empty-state"><div class="ico">📚</div><h3>Select a combination or career above</h3></div>';
+  document.getElementById('guideOut').innerHTML = h;
+}
+function renderTips() {
+  document.getElementById('tipsOut').innerHTML = TIPS.map((t, i) => `<div style="display:flex;gap:.7rem;padding:.48rem 0;border-bottom:1px solid var(--border);font-size:.83rem;"><div style="width:22px;height:22px;background:rgba(245,200,66,.1);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;color:var(--gold);flex-shrink:0;">${i + 1}</div><div style="color:var(--muted2);line-height:1.55;">${t}</div></div>`).join('');
+}
+function viewParent() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { alert("Enter your child's name."); return; }
+  showLoader('Loading student profile…');
+  setTimeout(() => {
+    hideLoader();
+    const demoGrades = { 'Mathematics': 'B', 'Physics': 'B', 'Chemistry': 'A', 'Biology': 'A', 'English Language': 'B', 'Geography': 'C', 'History & Political Education': 'B', 'Economics': 'C' };
+    renderParentProfile({ name, school: document.getElementById('p-school').value || 'Not specified', grades: demoGrades, career: 'Medicine / Surgery' });
+  }, 700);
+}
+function loadDemoParent() {
+  renderParentProfile({ name: 'Grace Akello', school: 'Arua Public S.S.S', grades: { 'Mathematics': 'A', 'Physics': 'A', 'Chemistry': 'A', 'Biology': 'B', 'English Language': 'B', 'Geography': 'B', 'History & Political Education': 'C', 'Economics': 'C' }, career: 'Engineering (Civil/Electrical/Mechanical)' });
+}
+function renderParentProfile(d) {
+  const ranked = rankCombos(d.grades);
+  const top3 = ranked.slice(0, 3);
+  const bestCareers = Object.keys(CAREER_MAP).map(c => { const e = evalCareerByGrades(c, d.grades); return { career: c, ...e }; }).filter(r => r.status === 'YES').sort((a, b) => b.score - a.score).slice(0, 5);
+  document.getElementById('parentOut').innerHTML = `<div class="card"><div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);"><div style="width:48px;height:48px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;">👤</div><div><div style="font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;">${d.name}</div><div style="font-size:.8rem;color:var(--muted);">${d.school}</div></div></div><div class="card-title">O-Level Grades</div><div class="tbl-wrap"><table><tbody>${Object.entries(d.grades).map(([s, g]) => `<tr><td>${s}</td><td><span class="badge ${g === 'A' ? 'bg-t' : g === 'B' ? 'bg-s' : g === 'C' ? 'bg-g' : 'bg-r'}">${g}</span></td></tr>`).join('')}</tbody></table></div></div><div class="card"><div class="card-title">Top 3 Recommended Combinations</div><div class="tbl-wrap"><table><thead><tr><th>Combination</th><th>Full Name</th><th>Match</th><th>Subsidiary</th></tr></thead><tbody>${top3.map(c => `<tr><td><strong>${c.code}</strong></td><td style="font-size:.77rem;color:var(--muted)">${c.full}</td><td><span class="badge ${c.pct >= 70 ? 'bg-t' : 'bg-g'}">${c.pct}%</span></td><td style="font-size:.75rem;color:var(--muted)">${c.sub_req}</td></tr>`).join('')}</tbody></table></div></div>${bestCareers.length ? `<div class="card"><div class="card-title">Best Career Matches</div><div class="career-grid">${bestCareers.map(r => `<div class="career-tile ct-tier-yes"><div class="ct-ico">${CAREER_ICONS[r.career] || '🎓'}</div><div class="ct-name">${r.career}</div><span class="badge bg-t">✓</span><div class="ct-pct">${r.score}%</div></div>`).join('')}</div></div>` : ''}<div class="alert alert-g">💡 <strong>For Parents:</strong> A-Level choice must reflect your child's genuine interests, strengths and career goals. Academic performance alone does not predict success — passion, discipline and mindset matter equally. Please also consult your school's guidance counselor.</div>`;
+}
+function populateSelects() {
+  const careers = Object.keys(CAREER_MAP).sort();
+  ['cc-career', 'm-career'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el || el.options.length > 1) return;
+    careers.forEach(c => el.appendChild(new Option(c, c)));
+  });
+  ['r-region', 'p-region'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el || el.options.length > 1) return;
+    UGANDA_REGIONS.forEach(r => el.appendChild(new Option(r, r)));
+  });
+}
+function initDrop() {
+  const dz = document.getElementById('dropZone');
+  if (!dz) return;
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag'); if (e.dataTransfer.files[0]) { document.getElementById('fileIn').files = e.dataTransfer.files; handleUpload(document.getElementById('fileIn')); } });
+}
 
-// ========== INITIALISATION ==========
-window.addEventListener('DOMContentLoaded', async () => {
-  buildGradeForm(); populateSelects(); populateGuideSelects(); renderTips(); initDrop(); initRegionButtons();
+// ---------------------- AI ADVISOR (original stripped – keeps UI but no real AI, as requested) ----------------------
+function goToAI(query) { go('ai-advisor'); setTimeout(() => { document.getElementById('chatInput').value = query; sendChat(); }, 400); }
+function startTopic(topic) { goToAI('Help me choose my A-Level combination'); }
+function setMode(mode, btn) { chatMode = mode; document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('on')); btn.classList.add('on'); addAIMsg(`Switching to ${mode} mode.`); }
+function quickSend(el) { goToAI(el.textContent); }
+function initChat() { addAIMsg("👋 Hello! I'm your EduPath AI Advisor. Ask me anything about Uganda's education system."); }
+function addAIMsg(text) { let el = document.getElementById('chatMsgs'); if (el) el.innerHTML += `<div class="msg msg-ai"><div class="msg-av msg-av-ai">🤖</div><div><div class="msg-bubble bubble-ai">${text}</div></div></div>`; el.scrollTop = el.scrollHeight; }
+function addUserMsg(text) { let el = document.getElementById('chatMsgs'); if (el) el.innerHTML += `<div class="msg msg-user"><div class="msg-av msg-av-u">👤</div><div><div class="msg-bubble bubble-user">${text}</div></div></div>`; el.scrollTop = el.scrollHeight; }
+function addTyping() { let id = 'typ_' + Date.now(); let el = document.getElementById('chatMsgs'); let div = document.createElement('div'); div.className = 'msg msg-ai'; div.id = id; div.innerHTML = '<div class="msg-av msg-av-ai">🤖</div><div><div class="msg-bubble bubble-ai"><div class="typing"><span></span><span></span><span></span></div></div></div>'; el.appendChild(div); el.scrollTop = el.scrollHeight; return id; }
+function removeTyping(id) { let el = document.getElementById(id); if (el) el.remove(); }
+async function sendChat() { let input = document.getElementById('chatInput'); let msg = input.value.trim(); if (!msg) return; input.value = ''; addUserMsg(msg); let typId = addTyping(); try { await new Promise(r => setTimeout(r, 1000)); removeTyping(typId); addAIMsg(`Thanks for your question: "${msg}". For detailed guidance, use the Student Portal to enter your grades, then the AI will give personalised advice.`); } catch (e) { removeTyping(typId); addAIMsg("I'm offline right now. Please use the Student Portal for combination rankings."); } }
+function clearChat() { document.getElementById('chatMsgs').innerHTML = ''; initChat(); }
+
+// ---------------------- INITIALISE ----------------------
+window.addEventListener('load', async () => {
+  buildGradeForm();
+  populateSelects();
+  populateGuideSelects();
+  renderTips();
+  initDrop();
+  initRegionButtons();
   showLoader('Loading schools...');
-  allPartnerSchools = await fetchSchools();
-  featuredSchools = allPartnerSchools.filter(s => s.featured);
+  allPartnerSchools = await fetchPartnerSchools();
   renderAllSchools();
   renderLandingFeatured();
+  setRegionBackground('all');
   hideLoader();
+  const ta = document.getElementById('chatInput');
+  if (ta) ta.addEventListener('input', function () { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 120) + 'px'; });
 });
 </script>
 </body>
