@@ -3,6 +3,11 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 
+# Cloudinary imports (keep for storage backend)
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +20,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # ──────────────────────────────────────────────────────────────────
-# 2. INSTALLED APPS (No changes needed)
+# 2. INSTALLED APPS
 # ──────────────────────────────────────────────────────────────────
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,21 +35,23 @@ INSTALLED_APPS = [
     'schools',
     'students',
     'advertising',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 # ──────────────────────────────────────────────────────────────────
-# 3. MIDDLEWARE (WhiteNoise for static files, security first)
+# 3. MIDDLEWARE
 # ──────────────────────────────────────────────────────────────────
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',          # For static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',           # Protects against CSRF
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware', # Prevents clickjacking
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'edupath.urls'
@@ -73,12 +80,10 @@ WSGI_APPLICATION = 'edupath.wsgi.application'
 # ──────────────────────────────────────────────────────────────────
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
-    # Production: Render PostgreSQL
     DATABASES = {
         'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
     }
 else:
-    # Development: SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -87,7 +92,7 @@ else:
     }
 
 # ──────────────────────────────────────────────────────────────────
-# 5. PASSWORD VALIDATION (Strong passwords)
+# 5. PASSWORD VALIDATION
 # ──────────────────────────────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -97,7 +102,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # ──────────────────────────────────────────────────────────────────
-# 6. INTERNATIONALIZATION
+# 6. CLOUDINARY STORAGE (for persistent media files)
+# ──────────────────────────────────────────────────────────────────
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv(' diqiedkew'),
+    'API_KEY': os.getenv('275472781729954'),
+    'API_SECRET': os.getenv('qlK7o8_2Y0MfDP0Si7T7D4m0NIo'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# ──────────────────────────────────────────────────────────────────
+# 7. INTERNATIONALIZATION
 # ──────────────────────────────────────────────────────────────────
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Kampala'
@@ -105,23 +120,24 @@ USE_I18N = True
 USE_TZ = True
 
 # ──────────────────────────────────────────────────────────────────
-# 7. STATIC & MEDIA FILES
+# 8. STATIC & MEDIA FILES
 # ──────────────────────────────────────────────────────────────────
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# MEDIA_URL is still used for local development, but Cloudinary overrides actual storage
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ──────────────────────────────────────────────────────────────────
-# 8. CUSTOM USER MODEL
+# 9. CUSTOM USER MODEL
 # ──────────────────────────────────────────────────────────────────
 AUTH_USER_MODEL = 'accounts.SchoolUser'
 
 # ──────────────────────────────────────────────────────────────────
-# 9. REST FRAMEWORK (Simplified for now)
+# 10. REST FRAMEWORK
 # ──────────────────────────────────────────────────────────────────
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],
@@ -131,25 +147,25 @@ REST_FRAMEWORK = {
 }
 
 # ──────────────────────────────────────────────────────────────────
-# 10. CORS (Allow only your frontend domain in production)
+# 11. CORS
 # ──────────────────────────────────────────────────────────────────
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:8000,http://127.0.0.1:8000').split(',')
 
 # ──────────────────────────────────────────────────────────────────
-# 11. SECURITY HEADERS (For production, when DEBUG=False)
+# 12. SECURITY HEADERS (Production only)
 # ──────────────────────────────────────────────────────────────────
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True                      # Force HTTPS
-    SESSION_COOKIE_SECURE = True                    # Secure session cookie
-    CSRF_COOKIE_SECURE = True                       # Secure CSRF cookie
-    SECURE_BROWSER_XSS_FILTER = True                # XSS protection
-    SECURE_CONTENT_TYPE_NOSNIFF = True              # Prevent MIME sniffing
-    X_FRAME_OPTIONS = 'DENY'                        # Prevent clickjacking
-    SECURE_HSTS_SECONDS = 31536000                  # 1 year HSTS
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
 # ──────────────────────────────────────────────────────────────────
-# 12. DEFAULT PRIMARY KEY FIELD
+# 13. DEFAULT PRIMARY KEY FIELD
 # ──────────────────────────────────────────────────────────────────
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
