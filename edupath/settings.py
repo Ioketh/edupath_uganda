@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ──────────────────────────────────────────────────────────────────
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-change-this-in-production')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,https://edupath-uganda.onrender.com').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,edupath-uganda.onrender.com').split(',')
 
 # ──────────────────────────────────────────────────────────────────
 # 2. INSTALLED APPS
@@ -104,11 +104,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # ──────────────────────────────────────────────────────────────────
 # 6. CLOUDINARY STORAGE (for persistent media files)
 # ──────────────────────────────────────────────────────────────────
+# Get Cloudinary credentials from environment variables (set on Render)
+CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME', 'diqiedkew')
+CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY', '275472781729954')
+CLOUDINARY_API_SECRET = os.getenv('CLOUDINARY_API_SECRET', 'qlK7o8_2Y0MfDP0Si7T7D4m0NIo')
+
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv(' diqiedkew'),
-    'API_KEY': os.getenv('275472781729954'),
-    'API_SECRET': os.getenv('qlK7o8_2Y0MfDP0Si7T7D4m0NIo'),
+    'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+    'API_KEY': CLOUDINARY_API_KEY,
+    'API_SECRET': CLOUDINARY_API_SECRET,
 }
+
+# Configure Cloudinary SDK directly
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=CLOUDINARY_API_KEY,
+    api_secret=CLOUDINARY_API_SECRET,
+)
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # ──────────────────────────────────────────────────────────────────
